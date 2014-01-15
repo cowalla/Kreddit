@@ -1,9 +1,21 @@
-<h1> Hello World </h1>
+<h1> Main Page (links index) </h1>
 
 <div id='content'>
+	<% @links.each do |link| %>
+	<div id="vote"><%=button_to "upvote", "http://www.google.com"%></div>
+	<div id="vote"><%=button_to "downvote", "http://www.google.com"%></div>	
+	
+	<div id="<%=link.url%>" class="link"><%=link_to link.description,  "http://"+link.url %>
+		</div>
+		
+		<div>
+			
+		</div>
+		
+		<div id="helpful-links">
+			<%=link_to "###" + "comments", "http://www.google.com" %>
+		</div>
+		<br>
+	<% end %>
 
 </div>
-
-<script>
-
-</script>

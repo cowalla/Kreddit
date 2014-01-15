@@ -5,10 +5,10 @@ RedditApp.Routers.Router = Backbone.Router.extend({
 		this.links = options.links;
 	},
 
-	routes: {
-		'': "mainpage",
-		"r/:id": "subredditsShow"
-	},
+	// routes: {
+	// 	'': "mainpage",
+	// 	"r/:id": "subredditsShow"
+	// },
 	
 	mainpage: function(){
 		var that = this;

@@ -2,7 +2,7 @@ class LinksController < ApplicationController
   
   def index
     @links = Link.all
-    render :json => @links
+    # render :json => @links
   end
   
   def show
