@@ -1,20 +1,30 @@
 <h3> submitting to cowalla-reddit </h3>
 
-<form action="/links" method="post">
+<% if !!current_user %>
 
-  <label for="description">Description</label>
-  <input
-     id="description"
-     name="link[description]"
-     type="text">
-  <br>
+	<form action="/links" method="post">
+	
+		<input type="hidden"
+		name="authenticity_token"
+		value="<%= form_authenticity_token %>">
 
-  <label for="link_url">Url</label>
-  <input
-     id="url"
-     name="link[url]"
-     type="text">
-  <br>
+	  <label for="description">Description</label>
+	  <input
+	     id="description"
+	     name="link[description]"
+	     type="text">
+	  <br>
 
-  <input type="submit" value="submit">
-</form>
+	  <label for="link_url">Url</label>
+	  <input
+	     id="url"
+	     name="link[url]"
+	     type="text">
+	  <br>
+
+	  <input type="submit" value="submit">
+	</form>
+
+<% else %>
+	<div class="text"> <%=link_to "Sign in", new_session_url %> to add a link </div>
+<% end %>

@@ -15,13 +15,17 @@ class LinksController < ApplicationController
   end
   
   def create
-    params[:link][:user_id] = 1
-    params[:link][:subreddit_id] = 1
-    @link = Link.new(params[:link])
-    if @link.save
-      redirect_to link_url(@link)
+    if !!current_user
+      params[:link][:user_id] = current_user.id
+      params[:link][:subreddit_id] = 1
+      @link = Link.new(params[:link])
+      if @link.save
+        redirect_to link_url(@link)
+      else
+        render :json => @link.errors.full_messages
+      end
     else
-      render :json => @link.errors.full_messages
+      redirect_to new_session_url
     end
   end
   

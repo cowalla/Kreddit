@@ -1,11 +1,16 @@
 class CommentsController < ApplicationController
   
   def create
-    @comment = Comment.new(params[:comment])
-    if @comment.save
-      redirect_to link_url(@comment.link)
+
+    if !!current_user
+      @comment = Comment.new(params[:comment])
+      if @comment.save
+        redirect_to link_url(@comment.link)
+      else
+        render :json => @comment.errors.full_messages
+      end
     else
-      render :json => @comment.errors.full_messages
+      redirect_to new_session_url
     end
   end
   

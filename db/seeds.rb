@@ -2,7 +2,7 @@
 
 ActiveRecord::Base.transaction do
   
-  User.new(:username => "connor", :password => "connor").save!
+  User.new(:username => "connor", :password => "trytoguess").save!
   Subreddit.new(:title => "Main", :user_id => 1).save!
   Link.new(:url => "http://i.imgur.com/KHEiLJx.gif", :description => "Fuck it, I guess this is my life now", :user_id => 1, :subreddit_id => 1).save!
   Link.new(:url => "http://i.imgur.com/w0tX1rt.jpg", :description => "My cat is stupid and is ruining my chair", :user_id => 1, :subreddit_id => 1).save!

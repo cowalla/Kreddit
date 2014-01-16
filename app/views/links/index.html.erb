@@ -24,7 +24,10 @@
 
 
 </div>
-
-<div>
-	<%= link_to "Add a link!", new_link_url %>
-	</div>
+	<% if !!current_user %>
+		<div class="text">
+			<%= link_to "Add a link!", new_link_url %>
+		</div>
+	<% else %>
+		<div class="text"> <%=link_to "Sign in", new_session_url %> to add a comment </div>
+	<% end %>

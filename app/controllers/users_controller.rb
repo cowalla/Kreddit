@@ -1,25 +1,28 @@
 class UsersController < ApplicationController
   
-  def show
-    @user = User.find(params[:id])
-    if @user
+  before_filter :require_current_user!, :only => [:show]
+  before_filter :require_no_current_user!, :only => [:create, :new]
+
+  def create
+    @user = User.new(params[:user])
+
+    if @user.save
+      self.current_user = @user
       redirect_to user_url(@user)
     else
       render :json => @user.errors.full_messages
     end
   end
-  
+
   def new
     @user = User.new
   end
-  
-  def create
-    @user = User.new(params[:user])
 
-    if @user.save
-      redirect_to user_url(@user)
+  def show
+    if params.include?(:id)
+      @user = User.find(params[:id])
     else
-      render :json => @user.errors.full_messages
+      redirect_to user_url(current_user)
     end
   end
   

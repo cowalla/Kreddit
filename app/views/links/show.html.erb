@@ -1,5 +1,5 @@
 <h1> <%=@link.description %></h1>
-
+<%link_id= @link.id%>
 <ul>
 <% @link.comments.each do |comment| %>
  
@@ -7,3 +7,37 @@
 	
 <% end %>
 </ul>
+<br>
+
+<% if !!current_user %>
+	<div class="form-input">
+	<form action="/links/<%=link_id%>/comments" method="post">
+	
+		<input type="hidden"
+		name="authenticity_token"
+		value="<%= form_authenticity_token %>">
+	
+		<input type="hidden"
+		name="comment[user_id]"
+		id="user_id"
+		value="<%= current_user.id %>">
+	
+		<input type="hidden"
+		name="comment[link_id]"
+		id="user_id"
+		value="<%= current_user.id %>">
+
+	  <label for="body"></label>
+	  <textarea
+	     id="body"
+	     name="comment[body]"
+		 placeholder="Your comment here"></textarea>
+	  <br>
+		<br>
+	  <input type="submit" value="submit" class="btn btn-primary">
+	</form>
+
+	</div>
+<% else %>
+	<div class="text"> <%=link_to "Sign in", new_session_url %> to add a comment </div>
+<% end %>
