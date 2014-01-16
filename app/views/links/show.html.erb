@@ -1,0 +1,9 @@
+<h1> <%=@link.description %></h1>
+
+<ul>
+<% @link.comments.each do |comment| %>
+ 
+	<li> <%="#{User.find(comment.user_id).username}"+ ": " %>   <%=comment.body%> </li>
+	
+<% end %>
+</ul>

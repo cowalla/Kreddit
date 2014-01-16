@@ -8,7 +8,19 @@
 </head>
 <body>
 
-<%= yield %>
+	<header>
+		<nav class="navbar navbar-default" role="banner">
+		<%= link_to "All", "/", :class => "navbar-brand" %>	
+		<%= link_to "Funny", "/", :class => "navbar-brand" %>	
+		<%= link_to "Science", "/", :class => "navbar-brand" %>	
+		<%= link_to "Google", "http://www.google.com", :class => "navbar-brand" %>	
+		</nav>
+	</header>
+
+
+	<div class="container">
+	<%= yield %>
+	</div>
 
 </body>
 </html>

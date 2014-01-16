@@ -1,21 +1,30 @@
-<h1> Main Page (links index) </h1>
+<h1> Front Page </h1>
 
 <div id='content'>
 	<% @links.each do |link| %>
-	<div id="vote"><%=button_to "upvote", "http://www.google.com"%></div>
-	<div id="vote"><%=button_to "downvote", "http://www.google.com"%></div>	
-	
-	<div id="<%=link.url%>" class="link"><%=link_to link.description,  "http://"+link.url %>
+	<% comment_count = link.comments.length %>
+	<div class="row">
+		<div class="col-xs-5">
+		<%=button_to "upvote", "http://www.google.com"%>
+				<div class="score">100</div>
+		<%=button_to "downvote", "http://www.google.com"%>
 		</div>
 		
-		<div>
-			
+		<div class = "col-xs-5">
+			<div>
+			<%=link_to link.description,  link.url %>
+			</div>
+			<div>
+			<%=link_to "#{comment_count} " + "comments", link_url(link) %>
+			</div>
 		</div>
-		
-		<div id="helpful-links">
-			<%=link_to "###" + "comments", "http://www.google.com" %>
-		</div>
-		<br>
+	</div>
+	<br>
 	<% end %>
 
+
 </div>
+
+<div>
+	<%= link_to "Add a link!", new_link_url %>
+	</div>
