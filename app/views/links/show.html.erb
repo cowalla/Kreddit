@@ -1,5 +1,4 @@
 <h1> <%=@link.description %></h1>
-<%link_id= @link.id%>
 <ul>
 <% @link.comments.each do |comment| %>
  
@@ -11,7 +10,7 @@
 
 <% if !!current_user %>
 	<div class="form-input">
-	<form action="/links/<%=link_id%>/comments" method="post">
+	<form action="/links/<%=@link.id%>/comments" method="post">
 	
 		<input type="hidden"
 		name="authenticity_token"
@@ -24,8 +23,8 @@
 	
 		<input type="hidden"
 		name="comment[link_id]"
-		id="user_id"
-		value="<%= current_user.id %>">
+		id="link_id"
+		value="<%= @link.id %>">
 
 	  <label for="body"></label>
 	  <textarea
