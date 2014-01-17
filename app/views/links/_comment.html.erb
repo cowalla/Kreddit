@@ -1,12 +1,8 @@
 
 <div class="comment-block">
-	<div class="row">
-	<div class="col-xs-1">
-	<%=button_to "upvote", "http://www.google.com"%>
-			<div class="score">100</div>
-	<%=button_to "downvote", "http://www.google.com"%>
-	</div>
- <%= User.find(parent.user_id).username %>: <%= parent.body%><br>
+<%= render partial: "vote" %>
+<% parent_user = User.find(parent.user_id) %>
+ <%= link_to parent_user.username, user_url(parent_user) %>: <%= parent.body%><br>
 	
 	<div class="form-hidden">
 	<form action="/comments" method="post">
@@ -37,7 +33,9 @@
 </div>
 <ul>
 	<% children.each do |comment, value| %>
+	<br>
 	<li> <%= render partial: "comment", :locals => { parent: comment, children: comment.comments }%> </li> 
+	<br>
 	<%end%>
 </ul>
 </div>

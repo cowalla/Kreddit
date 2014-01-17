@@ -21,7 +21,14 @@ class UsersController < ApplicationController
   def show
     if params.include?(:id)
       @user = User.find(params[:id])
+      @karma = 100
+      @submitted_links = Link.where({:user_id => @user.id})
+      @created_at = @user.created_at
     else
+      @user = current_user
+      @karma = 100
+      @submitted_links = Link.where({:user_id => @user.id})
+      @created_at = @user.created_at
       redirect_to user_url(current_user)
     end
   end

@@ -1,1 +1,23 @@
-<h1>User Show Page</h1>
+<h1><%= @user.username %></h1>
+
+<div class="user-description">
+<ul>
+	<li>Karma: <%= @karma %></li>
+	<li>Joined: <%= @created_at %></li>
+</ul>
+
+<% if !!@submitted_links && !@submitted_links.empty? %>
+<h3> Submitted Links </h3>
+	<ul>
+
+			<% @submitted_links.each do |link| %>
+			<li><%= link_to link.description, link.url %></li>
+			<% end %>	
+	</ul>
+<% else %>
+
+	<h3> You haven't submitted any links yet! </h3>
+
+<% end %>
+	
+</div>

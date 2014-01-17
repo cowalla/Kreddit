@@ -3,19 +3,18 @@
 <div id='content'>
 	<% @links.each do |link| %>
 	<% comment_count = link.comments.length %>
+	<% submitting_user = User.find(link.user_id) %>
 	<div class="row">
-		<div class="col-xs-5">
-		<%=button_to "upvote", "http://www.google.com"%>
-				<div class="score">100</div>
-		<%=button_to "downvote", "http://www.google.com"%>
-		</div>
-		
+		<%= render partial: "vote" %>
 		<div class = "col-xs-5">
 			<div>
 			<%=link_to link.description,  link.url %>
 			</div>
 			<div>
 			<%=link_to "#{comment_count} " + "comments", link_url(link) %>
+			</div>
+			<div>
+			Submitted by: <%=link_to submitting_user.username, user_url(submitting_user) %>
 			</div>
 		</div>
 	</div>

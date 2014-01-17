@@ -4,9 +4,6 @@ class CommentsController < ApplicationController
     if !!current_user
       params[:comment][:parent_comment_id] ||= nil
       params[:comment][:user_id] = current_user.id
-      puts "++++++++++"
-       puts params[:comment]
-        puts "++++++++++"
       @comment = Comment.new(params[:comment])
       if @comment.save
         redirect_to link_url(@comment.link)
