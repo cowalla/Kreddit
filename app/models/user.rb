@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :subreddits
   has_many :links
   has_many :comments
+  has_many :votes
   # has_many :subreddits
   
   validates :password_digest, :presence => { :message => "Password can't be blank" }

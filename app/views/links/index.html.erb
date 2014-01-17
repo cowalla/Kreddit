@@ -4,8 +4,21 @@
 	<% @links.each do |link| %>
 	<% comment_count = link.comments.length %>
 	<% submitting_user = User.find(link.user_id) %>
+	<% votes = link.votes %>
+	<% upvotes = votes.select{ |vte| vte.value == 1 } %>
+	<% downvotes = votes.select{ |vte| vte.value == -1 } %>
+	<% @link_karma = (upvotes.count - downvotes.count) %>
+	<% @tmp_comment = nil%>
 	<div class="row">
+		<%@vote_link = link%>
+		<%@comment = nil %>
+		<form action= "/votes" method="POST">
+			<input type="hidden"
+			name="authenticity_token"
+			value="<%=form_authenticity_token%>">
+			
 		<%= render partial: "vote" %>
+		</form>
 		<div class = "col-xs-5">
 			<div>
 			<%=link_to link.description,  link.url %>

@@ -2,6 +2,7 @@ class Link < ActiveRecord::Base
   attr_accessible :url, :description, :user_id, :subreddit_id
   
   belongs_to :user
+  has_many :votes
   has_many :comments, :dependent => :destroy
   belongs_to :subreddit
   
@@ -38,16 +39,6 @@ class Link < ActiveRecord::Base
       end
     end
     return comment_hash
-  end
-
-  def self.comment_render(comment_hash)
-    comment_hash.each do |parent_comment, children_array|
-      if !children_array.empty?
-        render partial: "comment", locals: { parent: parent_comment, children: children_array }
-      else
-        render partial: "lonely", locals: { ronin_comment: parent_comment }
-      end
-    end
   end
   
 end

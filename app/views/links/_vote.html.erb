@@ -1,27 +1,28 @@
-<head>
-	<script type="text/javascript">
-	var upvote = function(){
-		alert("You upvoted!")
-	};
-	var downvote = function(){
-		alert("You downvoted!")
-	}
-	</script>
-</head>
+
 <div class="col-xs-1">
 	<div class="vote">
 		
-		<div class="upvote">
-			<button onclick="upvote">Upvote</button>
-		</div>
-		<div class="score">###
-
-		</div>
+	<form action= "/votes" method="POST">
+	<input type="hidden"
+	name="authenticity_token"
+	value="<%=form_authenticity_token%>">
+	
+	<%= render partial: "upvote" %>
+	</form>
+	
+		<%if !!@comment_karma %>
+			<div class="score"><%= @comment_karma %></div>
+		<% else %>
+			<div class="score"><%= @link_karma %></div>
+		<% end %>
 		
-		<div class="downvote">
-			<button onclick="downvote">Downvote</button>
-		</div>
-		
+	<form action= "/votes" method="POST">
+	<input type="hidden"
+	name="authenticity_token"
+	value="<%=form_authenticity_token%>">
+	
+	<%= render partial: "downvote" %>
+		</form>
 	</div>
 </div>
 

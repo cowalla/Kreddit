@@ -1,6 +1,19 @@
 
 <div class="comment-block">
-<%= render partial: "vote" %>
+	<%@vote_link = nil %>
+	<%@vote_comment = parent %>
+	<%comment_votes = parent.votes%>
+	<%comment_upvotes = comment_votes.select{|vote| vote.value == 1 }%>
+	<%comment_downvotes = comment_votes.select{|vote| vote.value == -1 }%>
+	<%@comment_karma = (comment_upvotes.count - comment_downvotes.count)%>
+	
+	<form action= "/votes" method="POST">
+		<input type="hidden"
+		name="authenticity_token"
+		value="<%=form_authenticity_token%>">
+		
+	<%= render partial: "vote" %>
+	</form>
 <% parent_user = User.find(parent.user_id) %>
  <%= link_to parent_user.username, user_url(parent_user) %>: <%= parent.body%><br>
 	

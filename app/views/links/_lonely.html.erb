@@ -1,5 +1,15 @@
 <div class="comment-section">
-<%= render partial: "vote" %>
+	
+	<%@vote_link = nil %>
+	<%@vote_comment = ronin_comment %>
+	<form action= "/votes" method="POST">
+		<input type="hidden"
+		name="authenticity_token"
+		value="<%=form_authenticity_token%>">
+		
+	<%= render partial: "vote" %>
+	</form>
+
 <% user = User.find(ronin_comment.user_id) %>
 <%=link_to user.username, user_url(user)%>: <%=ronin_comment.body%>
 <div class="form-hidden">

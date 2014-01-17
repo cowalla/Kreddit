@@ -1,0 +1,16 @@
+# each link/comment has upvotes and downvotes
+# upvotes/downvotes are arrays of user_ids
+# when a user tries to vote on a link, 
+# see whether the user is a part of either list
+
+# if they are in the upvotes list
+# && they are trying to upvote, do nothing
+# && they are trying to downvote, remove id from upvote list,
+#   add it to the downvote list
+
+# if they are in the downvotes list
+# && they are trying to downvote, do nothing
+# && they are trying to upvote, remove id from downvote list,
+#   add it to the upvote list
+
+# if they are in neither, add to the right list

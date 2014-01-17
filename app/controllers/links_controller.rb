@@ -7,6 +7,10 @@ class LinksController < ApplicationController
   def show
     @link = Link.find(params[:id])
     @comment_hash = Link.comment_hash_by_link_id(params[:id])
+    @votes = @link.votes
+    @upvotes = @votes.select{ |vote| vote.value == 1 }
+    @downvotes = @votes.select{ |vote| vote.value == -1 }
+    @link_karma = (@upvotes.count - @downvotes.count)
   end
   
   def new
