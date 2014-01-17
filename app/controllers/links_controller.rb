@@ -2,12 +2,11 @@ class LinksController < ApplicationController
   
   def index
     @links = Link.all
-    # render :json => @links
   end
   
   def show
     @link = Link.find(params[:id])
-    @comments = @link.comments
+    @comment_hash = Link.comment_hash_by_link_id(params[:id])
   end
   
   def new

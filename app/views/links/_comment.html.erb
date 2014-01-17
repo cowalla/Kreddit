@@ -1,0 +1,43 @@
+
+<div class="comment-block">
+	<div class="row">
+	<div class="col-xs-1">
+	<%=button_to "upvote", "http://www.google.com"%>
+			<div class="score">100</div>
+	<%=button_to "downvote", "http://www.google.com"%>
+	</div>
+ <%= User.find(parent.user_id).username %>: <%= parent.body%><br>
+	
+	<div class="form-hidden">
+	<form action="/comments" method="post">
+	
+		<input type="hidden"
+		name="authenticity_token"
+		value="<%= form_authenticity_token %>">
+	
+		<input type="hidden"
+		name="comment[parent_comment_id]"
+		id="parent_comment_id"
+		value="<%= parent.id %>">
+	
+		<input type="hidden"
+		name="comment[link_id]"
+		id="link_id"
+		value="<%= @link.id %>">
+		
+		<label for="body"></label>
+	  <textarea
+	     id="body"
+	     name="comment[body]"
+		 placeholder="Your comment here"></textarea>
+
+	  <input type="submit" value="submit" class="btn btn-primary">
+	</form>
+
+</div>
+<ul>
+	<% children.each do |comment, value| %>
+	<li> <%= render partial: "comment", :locals => { parent: comment, children: comment.comments }%> </li> 
+	<%end%>
+</ul>
+</div>

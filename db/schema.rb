@@ -14,11 +14,12 @@
 ActiveRecord::Schema.define(:version => 20140116010430) do
 
   create_table "comments", :force => true do |t|
-    t.text     "body",       :null => false
-    t.integer  "user_id",    :null => false
-    t.integer  "link_id",    :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.text     "body",              :null => false
+    t.integer  "user_id",           :null => false
+    t.integer  "link_id",           :null => false
+    t.integer  "parent_comment_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "links", :force => true do |t|

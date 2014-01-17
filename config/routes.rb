@@ -4,10 +4,7 @@ resources :users, :only => [:create, :new, :show]
 resources :links, :only => [:create, :new, :show, :destroy, :index]
 resources :subreddits, :only => [:create, :new, :show, :index]
 resource :session, :only => [:new, :create, :destroy]
-
-resources :links do
-  resources :comments, :only => [:create]
-end
+resources :comments, :only => [:create]
 
 root :to => "links#index"
 
