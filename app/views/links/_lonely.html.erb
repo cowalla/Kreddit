@@ -1,6 +1,7 @@
 <div class="comment-section">
 <%= render partial: "vote" %>
-<%="#{User.find(ronin_comment.user_id).username}"+ ": " %><%=ronin_comment.body%>
+<% user = User.find(ronin_comment.user_id) %>
+<%=link_to user.username, user_url(user)%>: <%=ronin_comment.body%>
 <div class="form-hidden">
 <form action="/comments" method="post">
 

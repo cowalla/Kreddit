@@ -1,4 +1,7 @@
 <h1> <%=link_to @link.description, @link.url %></h1>
+<% submitted_by = User.find(@link.user_id) %>
+<h3> Submitted by: <%= link_to submitted_by.username, user_url(submitted_by) %></h3>
+<br>
 <ul>
 	
 <% @comment_hash.each do |parent_comment, children_array| %>
