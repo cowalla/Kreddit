@@ -2,10 +2,10 @@
 <ul>
 	
 <% @comment_hash.each do |parent_comment, children_array| %>
-	<% if !children_array.empty? %>
-  		<%= render partial: "comment", locals: { parent: parent_comment, children: children_array } %>
- 	<% else %>
-   		<%= render partial: "lonely", locals: { ronin_comment: parent_comment } %>
+	<% if !children_array || children_array.empty? %>
+	<%= render partial: "lonely", locals: { ronin_comment: parent_comment } %>
+ 	<% elsif !children_array.empty? %>
+   	<%= render partial: "comment", locals: { parent: parent_comment, children: children_array } %>
 	<% end %>
 <% end %>
 	
@@ -19,11 +19,6 @@
 		<input type="hidden"
 		name="authenticity_token"
 		value="<%= form_authenticity_token %>">
-	
-		<input type="hidden"
-		name="comment[parent_comment_id]"
-		id="parent_comment_id"
-		value="<%= nil %>">
 	
 		<input type="hidden"
 		name="comment[link_id]"
