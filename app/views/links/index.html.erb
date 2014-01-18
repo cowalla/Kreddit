@@ -1,6 +1,6 @@
 <h1> Front Page </h1>
-
 <div id='content'>
+
 	<% @links.each do |link| %>
 	<% comment_count = link.comments.length %>
 	<% submitting_user = User.find(link.user_id) %>

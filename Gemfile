@@ -23,6 +23,10 @@ end
 gem 'jquery-rails'
 gem 'backbone-on-rails'
 gem 'newrelic_rpm'
+gem 'kaminari'
+
+#grab it
+#paperclip
 
 
 # To use ActiveModel has_secure_password
