@@ -5,7 +5,7 @@
 	<%comment_votes = parent.votes%>
 	<%comment_upvotes = comment_votes.select{|vote| vote.value == 1 }%>
 	<%comment_downvotes = comment_votes.select{|vote| vote.value == -1 }%>
-	<%@comment_karma = (comment_upvotes.count - comment_downvotes.count)%>
+	<%@c_karma = (comment_upvotes.count - comment_downvotes.count)%>
 	
 	<form action= "/votes" method="POST">
 		<input type="hidden"

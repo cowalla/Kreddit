@@ -10,8 +10,8 @@
 	<%= render partial: "upvote" %>
 	</form>
 	
-		<%if !!@comment_karma %>
-			<div class="score"><%= @comment_karma %></div>
+		<%if !!@c_karma %>
+			<div class="score"><%= @c_karma %></div>
 		<% else %>
 			<div class="score"><%= @link_karma %></div>
 		<% end %>

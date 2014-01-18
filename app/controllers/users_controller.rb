@@ -21,7 +21,10 @@ class UsersController < ApplicationController
   def show
     if params.include?(:id)
       @user = User.find(params[:id])
-      @karma = 100
+      user_votes = @user.votes
+      upvotes = user_votes.select{ |vte| vte.value == 1} 
+      downvotes = user_votes.select{ |vte| vte.value == -1} 
+      @karma = (upvotes.count - downvotes.count)
       @submitted_links = Link.where({:user_id => @user.id})
       @created_at = @user.created_at
     else
