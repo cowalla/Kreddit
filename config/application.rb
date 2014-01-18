@@ -60,5 +60,8 @@ module RedditClone
     config.assets.version = '1.0'
     
     config.assets.initialize_on_precompile = false
+    
+    # For Bootstrap glyphicons
+    config.assets.paths << "#{Rails}/vendor/assets/fonts"
   end
 end
