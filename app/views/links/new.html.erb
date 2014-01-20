@@ -2,7 +2,7 @@
 
 <% if !!current_user %>
 
-	<form action="/links" method="post">
+	<form action="/links" method="post" enctype="multipart/form-data">
 	
 		<input type="hidden"
 		name="authenticity_token"
@@ -14,14 +14,19 @@
 	     name="link[description]"
 	     type="text">
 	  <br>
-
-	  <label for="link_url">Url</label>
+	<br>
+<h2> Photo Content: </h3>
+	  <label for="link_url">Url:</label>
 	  <input
 	     id="url"
 	     name="link[url]"
 	     type="text">
 	  <br>
+	<h4> OR </h4>
+		<label for="avatar">Upload photo:</label>
+		<input type="file" name="link[avatar]" id="avatar"><br>
 
+		<br>
 	  <input type="submit" value="submit">
 	</form>
 

@@ -1,5 +1,5 @@
 class Link < ActiveRecord::Base
-  attr_accessible :url, :description, :user_id, :subreddit_id
+  attr_accessible :url, :description, :user_id, :subreddit_id, :avatar
   has_attached_file :avatar, :styles => { :medium => "300x300#", :thumb => "50x50#" }, :default_url => "https://cdn3.iconfinder.com/data/icons/umar/Reddit.png"
   belongs_to :user
   has_many :votes

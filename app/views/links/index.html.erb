@@ -28,7 +28,11 @@
 		</div>
 		<div class = "col-xs-5">
 			<div>
-			<%=link_to link.description,  link.url %>
+			<% if link.avatar.url == "https://cdn3.iconfinder.com/data/icons/umar/Reddit.png" %>
+				<%=link_to link.description,  link.url %>
+			<% else %>
+				<%=link_to link.description, link.avatar.url %>
+			<% end %>
 			</div>
 			<div>
 			<%=link_to "#{comment_count} " + "comments", link_url(link) %>

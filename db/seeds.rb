@@ -11,17 +11,16 @@ ActiveRecord::Base.transaction do
   Comment.new(:user_id => 1, :link_id => 1, :body => "Extended gif: The man is okay, with a Network Rail employee pushing the emergency button to stop the escalator.", :parent_comment_id => nil).save!
   Comment.new(:user_id => 1, :link_id => 1, :body => "We still have no proof he ever got up.", :parent_comment_id => 1).save!
   Comment.new(:user_id => 1, :link_id => 1, :body => "Some say that he still lays there on the escalators to this very day.", :parent_comment_id => 2).save!
-  Comment.new(:user_id => 1, :link_id => 1, :body => "Some say that he still lays there on the escalators to this very day.", :parent_comment_id => 2).save!
 
 
-  20.times do
-    User.create!(:username => Faker::Internet.user_name, :password => "qazqazqaz")
-    e = Faker::Internet.domain_name
-    Link.create!(:url => e, :description => Faker::Lorem.sentence, :user_id => 1, :subreddit_id => 1)
-    Link.create!({:url => Faker::Internet.domain_name, :description => Faker::Lorem.sentence, :user_id => 1, :subreddit_id => 1})
-    Comment.create!({:user_id => 1, :link_id => 1, :body => Faker::Lorem.paragraph, :parent_comment_id => nil})
-    Comment.create!(:user_id => 1, :link_id => 1, :body => Faker::Lorem.paragraph, :parent_comment_id => 1)
-  end
+  # 20.times do
+  #    User.create!(:username => Faker::Internet.user_name, :password => "qazqazqaz")
+  #    e = Faker::Internet.domain_name
+  #    Link.create!(:url => e, :description => Faker::Lorem.sentence, :user_id => 1, :subreddit_id => 1)
+  #    Link.create!({:url => Faker::Internet.domain_name, :description => Faker::Lorem.sentence, :user_id => 1, :subreddit_id => 1})
+  #    Comment.create!({:user_id => 1, :link_id => 1, :body => Faker::Lorem.paragraph, :parent_comment_id => nil})
+  #    Comment.create!(:user_id => 1, :link_id => 1, :body => Faker::Lorem.paragraph, :parent_comment_id => 1)
+  #  end
     
 end
 
