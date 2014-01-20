@@ -19,7 +19,7 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-
+gem 'figaro'
 gem 'jquery-rails'
 gem 'backbone-on-rails'
 gem 'newrelic_rpm'
@@ -28,6 +28,7 @@ gem 'faker'
 gem 'friendly_id'
 gem 'paperclip'
 gem 'grabbit'
+gem "aws-sdk"
 
 
 

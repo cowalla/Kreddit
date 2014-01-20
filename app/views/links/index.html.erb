@@ -10,6 +10,7 @@
 	<% @link_karma = (upvotes.count - downvotes.count) %>
 	<% @tmp_comment = nil%>
 	<div class="row">
+		
 		<%@vote_link = link%>
 		<%@comment = nil %>
 		<form action= "/votes" method="POST">
@@ -19,6 +20,12 @@
 			
 		<%= render partial: "vote" %>
 		</form>
+		
+		<spacer class="col-xs-1">
+		</spacer>
+		<div class="col-xs-1">
+			<%= image_tag link.avatar.url(:thumb) %>
+		</div>
 		<div class = "col-xs-5">
 			<div>
 			<%=link_to link.description,  link.url %>
@@ -28,7 +35,7 @@
 			</div>
 			<div>
 			Submitted by: <%=link_to submitting_user.username, user_url(submitting_user) %>
-			Submitted <%= ((Time.now - link.created_at)/3600).round %> hours ago
+			<%= ((Time.now - link.created_at)/3600).round %> hours ago
 			</div>
 		</div>
 	</div>

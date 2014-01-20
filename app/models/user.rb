@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  extend FriendlyId
   attr_accessible :username, :password
   attr_reader :password
   
@@ -12,6 +13,7 @@ class User < ActiveRecord::Base
   validates :password, :length => { :minimum => 6, :allow_nil => true }
   validates :session_token, :presence => true
   validates :username, :presence => true
+  friendly_id :username
 
   after_initialize :ensure_session_token
 
