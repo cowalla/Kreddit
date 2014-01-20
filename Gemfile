@@ -24,9 +24,13 @@ gem 'jquery-rails'
 gem 'backbone-on-rails'
 gem 'newrelic_rpm'
 gem 'kaminari'
+gem 'faker'
+gem 'friendly_id'
+gem 'paperclip'
+gem 'grabbit'
 
-#grab it
-#paperclip
+
+
 
 
 # To use ActiveModel has_secure_password

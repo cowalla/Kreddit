@@ -34,7 +34,7 @@
 	</div>
 	<br>
 	<% end %>
-
+<%= paginate @links %>
 
 </div>
 	<% if !!current_user %>
@@ -44,3 +44,6 @@
 	<% else %>
 		<div class="text"> <%=link_to "Sign in", new_session_url %> to add a comment </div>
 	<% end %>
+	<br>
+	
+	
