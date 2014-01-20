@@ -21,6 +21,11 @@ class LinksController < ApplicationController
     if !!current_user
       params[:link][:user_id] = current_user.id
       params[:link][:subreddit_id] = 1
+
+      if !params[:link][:avatar]
+        scrape = Grabbit.url(params[:link][:url])
+        params[:link][:avatar] = scrape.images[0]
+      end
       @link = Link.new(params[:link])
       if @link.save
         redirect_to link_url(@link)
