@@ -3,11 +3,16 @@ RedditApp.Routers.Router = Backbone.Router.extend({
 	initialize: function (options) {
 		this.$rootEl = options.$rootEl;
 	},
-
-	// routes: {
-	// 	'': "mainpage",
-	// 	"r/:id": "subredditsShow"
-	// },
+	
+	newPost: function () {
+	  var view = RedditApp.Views.NewPost();
+	  this.$rootEl.html(view.render().$el);
+	},
+	
+	favorites: function () {
+	  var view = RedditApp.Views.Favorites();
+	  this.$rootEl.html(view.render.$el);
+	},
 	
 	mainpage: function(){
 		var that = this;

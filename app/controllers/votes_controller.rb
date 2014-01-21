@@ -2,18 +2,22 @@ class VotesController < ApplicationController
   
   def create
     if !!current_user
-
+      subreddit_id = params[:vote][:subreddit_id]
+      params[:vote].delete(:subreddit_id)
+      
       @vote = Vote.new(params[:vote])
       user_comment_vote = Vote.find_by_comment_id(@vote.comment_id)
       user_link_vote = Vote.find_by_link_id(@vote.link_id)
-      
+      puts "++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+      puts params
+      puts "++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
       if @vote.save
         if !!@vote.link_id
           user_link_vote.destroy if !!user_link_vote
-          redirect_to links_url
+          redirect_to subreddit_url(subreddit_id)
         else
           user_comment_vote.destroy if !!user_comment_vote
-          redirect_to link_url(Link.find(Comment.find(@vote.comment_id).link_id))
+          redirect_to subreddit_url(subreddit_id)
         end
       else
         render :json => @errors.full_messages

@@ -6,7 +6,7 @@ window.RedditApp = {
 
   initialize: function() {
 		new RedditApp.Routers.Router({
-			"$rootEl": $("#content"),
+			"$rootEl": $("#sidebar-content"),
 		});
 		Backbone.history.start();
   }

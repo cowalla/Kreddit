@@ -28,16 +28,12 @@ class LinksController < ApplicationController
       subLinks = params[:link][:subreddit_ids]
       params[:link].delete(:subreddit_ids)
       @link = Link.new(params[:link])
-      puts subLinks
-      puts subLinks
-      puts subLinks
-      puts subLinks
-      puts subLinks
-      puts subLinks
+
       if @link.save
-        SubredditLink.new(:link_id => @link.id, :subreddit_id => subLinks["0"]).save unless subLinks["0"] == ""
+        SubredditLink.new(:link_id => @link.id, :subreddit_id => 1).save
         SubredditLink.new(:link_id => @link.id, :subreddit_id => subLinks["1"]).save unless subLinks["1"] == ""
         SubredditLink.new(:link_id => @link.id, :subreddit_id => subLinks["2"]).save unless subLinks["2"] == ""
+        SubredditLink.new(:link_id => @link.id, :subreddit_id => subLinks["3"]).save unless subLinks["3"] == ""
         redirect_to link_url(@link)
       else
         render :json => @link.errors.full_messages

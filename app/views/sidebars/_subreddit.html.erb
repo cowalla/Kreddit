@@ -1,0 +1,35 @@
+
+<div class="head">
+	<script type="text/javascript" charset="utf-8">
+	$(function () {
+		$('#sidebar ul').on('click', 'li', function (event) {
+			var action = $(event.target).data('action');
+			RedditApp.router[action]();
+		});
+	});
+	</script>
+</div>
+<div class="sidebar-content">
+	<ul class="nav nav-pills">
+	  <li class="active" data-action='newPost'><a>New Post</a></li>
+	  <li data-action='favorites'><a>Favorites</a></li>
+	</ul>
+</div>
+
+<div>
+<%= paginate @links %>
+<% if !!current_user %>
+
+<%= render :partial => "links/new" %>
+<% else %>	
+
+<h2><%= link_to "Sign Up", new_user_url %></h2>
+<h4> OR </h4>
+<%=	render :partial => "sessions/new" %>
+
+<% end %>
+</div>
+</div>
+
+
+</script>

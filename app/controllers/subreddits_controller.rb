@@ -18,5 +18,11 @@ class SubredditsController < ApplicationController
       render :json => @subreddit.errors.full_messages
     end
   end
+  
+  def main
+    @subreddit = Subreddit.find(1)
+    @links = @subreddit.links.page(params[:page]).per(5)
+    render :show
+  end
 
 end
