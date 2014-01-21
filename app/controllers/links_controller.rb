@@ -26,25 +26,18 @@ class LinksController < ApplicationController
         params[:link][:avatar] = scrape.images[0]
       end
       subLinks = params[:link][:subreddit_ids]
-      puts subLinks
-      puts subLinks
-      puts subLinks
-      puts subLinks
-      puts subLinks
-      puts subLinks
-
       params[:link].delete(:subreddit_ids)
       @link = Link.new(params[:link])
-      puts @link.id
-      puts @link.id
-      puts @link.id
+      puts subLinks
+      puts subLinks
+      puts subLinks
+      puts subLinks
+      puts subLinks
+      puts subLinks
       if @link.save
-        puts @link.id
-        puts @link.id
-        puts @link.id
-        SubredditLink.new(:link_id => @link.id, :subreddit_id => subLinks["0"]).save if !!subLinks["0"]
-        SubredditLink.new(:link_id => @link.id, :subreddit_id => subLinks["1"]).save if !!subLinks["1"]
-        SubredditLink.new(:link_id => @link.id, :subreddit_id => subLinks["2"]).save if !!subLinks["2"]
+        SubredditLink.new(:link_id => @link.id, :subreddit_id => subLinks["0"]).save unless subLinks["0"] == ""
+        SubredditLink.new(:link_id => @link.id, :subreddit_id => subLinks["1"]).save unless subLinks["1"] == ""
+        SubredditLink.new(:link_id => @link.id, :subreddit_id => subLinks["2"]).save unless subLinks["2"] == ""
         redirect_to link_url(@link)
       else
         render :json => @link.errors.full_messages

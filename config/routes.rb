@@ -8,6 +8,6 @@ resource :session, :only => [:new, :create, :destroy]
 resources :comments, :only => [:create]
 resources :votes, :only => [:create, :destroy]
 
-root :to => "links#index"
+root :to => "root#root"
 
 end

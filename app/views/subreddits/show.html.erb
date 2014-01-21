@@ -1,7 +1,4 @@
 <h2><%= @subreddit.title %></h2>
-
-
-<h1> Front Page </h1>
 <div id='content'>
 
 	<% @links.each do |link| %>
@@ -11,7 +8,7 @@
 	<% upvotes = votes.select{ |vte| vte.value == 1 } %>
 	<% downvotes = votes.select{ |vte| vte.value == -1 } %>
 	<% @link_karma = (upvotes.count - downvotes.count) %>
-	<% @tmp_comment = nil%>
+	<% @tmp_comment = nil %>
 	<div class="row">
 		
 		<%@vote_link = link%>
@@ -21,7 +18,7 @@
 			name="authenticity_token"
 			value="<%=form_authenticity_token%>">
 			
-		<%= render partial: "vote" %>
+		<%= render partial: "votes/vote" %>
 		</form>
 		
 		<spacer class="col-xs-1">

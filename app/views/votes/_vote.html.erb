@@ -7,7 +7,7 @@
 	name="authenticity_token"
 	value="<%=form_authenticity_token%>">
 	
-	<%= render partial: "upvote" %>
+	<%= render partial: "votes/upvote" %>
 	</form>
 	
 		<%if !!@c_karma %>
@@ -21,7 +21,7 @@
 	name="authenticity_token"
 	value="<%=form_authenticity_token%>">
 	
-	<%= render partial: "downvote" %>
+	<%= render partial: "votes/downvote" %>
 		</form>
 	</div>
 </div>

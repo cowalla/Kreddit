@@ -1,7 +1,7 @@
 class SubredditsController < ApplicationController
 
   def index
-    @subreddits = Subreddit.all
+    @subreddits = Subreddit.all 
   end
   
   def show
