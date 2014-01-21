@@ -14,14 +14,18 @@
 		<%= link_to "Funny", "/", :class => "navbar-brand" %>	
 		<%= link_to "Science", "/", :class => "navbar-brand" %>	
 		<%= link_to "Google", "http://www.google.com", :class => "navbar-brand" %>
-		<% if !!current_user %>
-		    <b>Logged in as: <%=link_to current_user.username, user_url(current_user) %></b>
-		    <b><%= button_to "Logout", session_url, :method => :delete %></b>
+			<spacer class="navbar navbar-right">
+				</spacer>
+			<div class="navbar navbar-right">
+			<% if !!current_user %>
+			    <b>Logged in as: <%=link_to current_user.username, user_url(current_user) %></b>
+			    <b><%= button_to "Logout", session_url, :method => :delete %></b>
 		
-		<%else%>
-			<b><%= link_to "Sign In", new_session_url %></b>
-			<b><%= link_to "Sign Up", new_user_url %></b>
-		<% end %>	
+			<%else%>
+				<b><%= link_to "Sign In", new_session_url %></b>
+				<b><%= link_to "Sign Up", new_user_url %></b>
+			<% end %>
+			</nav>	
 		</nav>
 	</header>
 
