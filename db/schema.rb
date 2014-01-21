@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(:version => 20140121004346) do
     t.string   "url",                 :null => false
     t.string   "description"
     t.integer  "user_id",             :null => false
-    t.integer  "subreddit_id",        :null => false
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.string   "avatar_file_name"

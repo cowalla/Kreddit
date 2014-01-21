@@ -20,14 +20,31 @@ class LinksController < ApplicationController
   def create
     if !!current_user
       params[:link][:user_id] = current_user.id
-      params[:link][:subreddit_id] = 1
-
+      
       if !params[:link][:avatar]
         scrape = Grabbit.url(params[:link][:url])
         params[:link][:avatar] = scrape.images[0]
       end
+      subLinks = params[:link][:subreddit_ids]
+      puts subLinks
+      puts subLinks
+      puts subLinks
+      puts subLinks
+      puts subLinks
+      puts subLinks
+
+      params[:link].delete(:subreddit_ids)
       @link = Link.new(params[:link])
+      puts @link.id
+      puts @link.id
+      puts @link.id
       if @link.save
+        puts @link.id
+        puts @link.id
+        puts @link.id
+        SubredditLink.new(:link_id => @link.id, :subreddit_id => subLinks["0"]).save if !!subLinks["0"]
+        SubredditLink.new(:link_id => @link.id, :subreddit_id => subLinks["1"]).save if !!subLinks["1"]
+        SubredditLink.new(:link_id => @link.id, :subreddit_id => subLinks["2"]).save if !!subLinks["2"]
         redirect_to link_url(@link)
       else
         render :json => @link.errors.full_messages

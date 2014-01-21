@@ -4,7 +4,6 @@ class CreateLinks < ActiveRecord::Migration
       t.string :url, :null => false
       t.string :description
       t.integer :user_id, :null => false
-      t.integer :subreddit_id, :null => false
       
       t.timestamps
     end
