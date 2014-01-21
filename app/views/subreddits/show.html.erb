@@ -1,3 +1,6 @@
+<h2><%= @subreddit.title %></h2>
+
+
 <h1> Front Page </h1>
 <div id='content'>
 
@@ -53,8 +56,9 @@
 			<%= link_to "Add a link!", new_link_url %>
 		</div>
 	<% else %>
-		<div class="text"> <%=link_to "Sign in", new_session_url %> to add a link </div>
+		<div class="text"> <%=link_to "Sign in", new_session_url %> to add a comment </div>
 	<% end %>
 	<br>
+	
 	
 	

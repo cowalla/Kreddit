@@ -1,0 +1,35 @@
+<h3> Create a subreddit </h3>
+
+<% if !!current_user %>
+
+	<form action="/subreddits" method="post">
+	
+		<input type="hidden"
+		name="authenticity_token"
+		value="<%= form_authenticity_token %>">
+		
+		<label for="name">Title:</label>
+	  <input
+	     id="name"
+	     name="subreddit[title]"
+	     type="text">
+
+	  <label for="description">Description</label>
+	  <input
+	     id="description"
+	     name="subreddit[description]"
+     	type="text">
+	  
+	<br>
+	
+	<input type="hidden"
+	name="subreddit[user_id]"
+	value="<%= current_user.id %>">
+	
+	<br>
+	  <input type="submit" value="submit">
+	</form>
+
+<% else %>
+	<div class="text"> <%=link_to "Sign in", new_session_url %> to add a link </div>
+<% end %>

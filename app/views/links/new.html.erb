@@ -1,5 +1,7 @@
-<h3> submitting to cowalla-reddit </h3>
+<h3> submitting to Kreddit </h3>
 
+<% @subreddits = Subreddit.all %>
+<% @subreddit_link_ids = []%>
 <% if !!current_user %>
 
 	<form action="/links" method="post" enctype="multipart/form-data">
@@ -13,8 +15,33 @@
 	     id="description"
 	     name="link[description]"
 	     type="text">
-	  <br>
+	</form>
+
+	<br>	
+	<h4> Choose up to three Subreddits </h4>
+	<select>
+	<% @subreddits.each do |subreddit| %>
+		  <option></option>	
+		  <option name="subreddit_link[:subreddit_id]" value="<%=subreddit.id%>"><%=subreddit.title%></option>
+	<% end %>
+	</select>
+	<select>
+	<% @subreddits.each do |subreddit| %>
+		<option></option>
+		  <option name="subreddit_link[:subreddit_id]" value="<%=subreddit.id%>"><%=subreddit.title%></option>
+
+	<% end %>
+	</select>
+	<select>
+	<% @subreddits.each do |subreddit| %>
+		<option></option>
+		  <option name="subreddit_link[:subreddit_id]" value="<%=subreddit.id%>"><%=subreddit.title%></option>
+
+	<% end %>
+	</select>
 	<br>
+	
+	
 <h2> Photo Content: </h3>
 	  <label for="link_url">Url:</label>
 	  <input
