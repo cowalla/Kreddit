@@ -18,11 +18,12 @@
 </head>
 <header>
 	<% @top_subreddits = Subreddit.all%>
-	<nav class="navbar navbar-default" role="banner">
+
+		<ul class="nav nav-pills">
 		<% @top_subreddits.each do |subreddit| %>
-		<div class ="navbar-brand">
+		<li>
 		<%= link_to subreddit.title, subreddit_url(subreddit) %>
-		</div> 	
+		</li>	
 		<% end %>
 		<div class="navbar navbar-right">
 		<% if !!current_user %>
@@ -33,7 +34,7 @@
 			<b><%= link_to "Sign Up", new_user_url %></b>
 		<% end %>
 		</nav>	
-	</nav>
+
 </header>
 
 <content>

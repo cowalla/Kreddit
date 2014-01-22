@@ -5,9 +5,10 @@ window.RedditApp = {
   Routers: {},
 
   initialize: function() {
-		new RedditApp.Routers.Router({
-			"$rootEl": $("#sidebar-content"),
+		RedditApp.router = new RedditApp.Routers.Router({
+			"$rootEl": $("#sidebar-content")
 		});
+		console.log("STARTing");
 		Backbone.history.start();
   }
 };

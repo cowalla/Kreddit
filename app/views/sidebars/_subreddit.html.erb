@@ -2,22 +2,27 @@
 <div class="head">
 	<script type="text/javascript" charset="utf-8">
 	$(function () {
-		$('#sidebar ul').on('click', 'li', function (event) {
-			var action = $(event.target).data('action');
-			RedditApp.router[action]();
+		that = $('.nav-sidebar');
+		var targetDiv = $(".sidebar-content");
+		that.on('click', 'li', function (event) {
+			var action = $(event.currentTarget).data('action');
+			RedditApp.router[action](targetDiv);
 		});
 	});
 	</script>
 </div>
-<div class="sidebar-content">
-	<ul class="nav nav-pills">
+<div class="sidebar">
+	<ul class="nav nav-sidebar nav-pills">
 	  <li class="active" data-action='newPost'><a>New Post</a></li>
-	  <li data-action='favorites'><a>Favorites</a></li>
+	  <li data-action='watching'><a>Watching</a></li>
 	</ul>
+	
+	<div class="sidebar-content">
+		</div>
 </div>
 
 <div>
-<%= paginate @links %>
+
 <% if !!current_user %>
 
 <%= render :partial => "links/new" %>
