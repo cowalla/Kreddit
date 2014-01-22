@@ -4,7 +4,7 @@
 <div id='content'>
 	<div class="row">
 	
-		<div class="links col-xs-9">
+		<div class="links col-lg-9">
 		<% @links.each do |link| %>
 			<div class="link-box col-xs-9" data-id="<%= link.id %>">
 				<% comment_count = link.comments.length %>
@@ -14,14 +14,12 @@
 				<% downvotes = votes.select{ |vte| vte.value == -1 } %>
 				<% @link_karma = (upvotes.count - downvotes.count) %>
 				<% @tmp_comment = nil %>
-			
-				<%@vote_link = link%>
-				<%@comment = nil %>
+				<% @comment = nil %>
 				<form action= "/votes" method="POST">
 					<input type="hidden"
 					name="authenticity_token"
 					value="<%=form_authenticity_token%>">
-			
+				<% @link = link %>
 				<%= render partial: "votes/vote" %>
 				</form>
 		
@@ -55,8 +53,8 @@
 					</div>
 				</div>
 					<div class="col-xs-1">
-					<button class="btn btn-primary-small">
-						Favorite
+					<button class="watch-button btn btn-primary" data-id="<%= link.id %>" data-description="<%= link.description[0..15] %>">
+						Watch
 						</button>
 						</div>
 			</div>

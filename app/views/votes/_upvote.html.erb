@@ -22,9 +22,14 @@
 			value="1">
 			
 			<input type="hidden"
+			id="id"
+			name="vote[link_id]"
+			value="<%= @link.id %>">
+			
+			<input type="hidden"
 			id="subreddit_id"
 			name="vote[subreddit_id]"
-			value="<%=@subreddit.id%>">
+			value="<%= @subreddit.id %>">
 			
 		<button type="submit" class="glyphicon glyphicon-chevron-up">
 			</button>

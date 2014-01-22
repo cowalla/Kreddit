@@ -14,7 +14,42 @@
 	});
 	console.log(document.cookie)
 	$("html").scrollTop(document.cookie);
+	
 	</script>
+	
+	<script>
+	$(document).ready(function(){
+		
+		var checkElt = function(elt, inputId){
+			var children = $(elt.children());
+			var flag = true;
+			children.each(function(index, child){
+				console.log($(child).data("id"));
+				console.log(inputId);
+				if($(child).data("id") == inputId){
+					flag = false;
+				};
+			});
+			return flag;
+		};
+		
+		$(".watch-button").click(function(event){
+			var that = $(event.target);
+			if(!checkElt($(".watched-posts"), that.data("id"))){
+				console.log("removing...");
+				$(".watched-post[data-id=" + that.data("id") + "]").remove();
+			} else {
+				console.log("appending...");
+				$(".watched-posts").append(
+					"<div class='watched-post btn btn-default' data-id="+ that.data("id") +"> " + that.data("description") + " </div>");
+			}
+
+
+
+		});
+	});
+	</script>
+
 </head>
 <header>
 	<% @top_subreddits = Subreddit.all%>
@@ -37,18 +72,32 @@
 
 </header>
 
-<content>
-	<div class="col-xs-3">
-		<%= render :partial => "sidebars/subreddit" %>
-	</div>
-</content>
-
 <body>
+<div class="container">
+	<div class="row">
 
-
-	<div class="container">
-	<%= yield %>
+		<div class="col-lg-9">
+			<div class="panel">
+		<%= yield %>
+		</div>
+		</div>
+	
+		<div class="col col-lg-2 sidebar-replace">
+			<div class="list-group">
+			<%= render "subreddits/sidebarContent" %>
+			</div>
+		</div>
 	</div>
-
+</div>
+<div class="navbar navbar-default navbar-fixed-bottom">
+	<div class="col col-lg-1">
+		<div class="list-group">
+		<%= render "sidebars/subreddit" %>
+		</div>
+	</div>
+	<div class="watched-posts">
+		</div>
+</div>
 </body>
+
 </html>

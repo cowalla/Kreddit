@@ -1,16 +1,13 @@
-window.RedditApp = {
+window.RedditClone = {
   Models: {},
   Collections: {},
   Views: {},
   Routers: {},
-
   initialize: function() {
-		RedditApp.router = new RedditApp.Routers.Router({
-			"$rootEl": $("#sidebar-content")
-		});
-		console.log("STARTing");
-		Backbone.history.start();
+    alert('Hello from Backbone!');
   }
 };
 
-$(RedditApp.initialize);
+$(document).ready(function(){
+  RedditClone.initialize();
+});

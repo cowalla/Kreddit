@@ -7,9 +7,9 @@
 	
 <% @comment_hash.each do |parent_comment, children_array| %>
 	<% if !children_array || children_array.empty? %>
-	<%= render partial: "lonely", locals: { comment: parent_comment } %>
+	<%= render partial: "comments/lonely", locals: { comment: parent_comment } %>
  	<% elsif !children_array.empty? %>
-   	<%= render partial: "comment", locals: { parent: parent_comment, children: children_array } %>
+   	<%= render partial: "comments/comment", locals: { parent: parent_comment, children: children_array } %>
 	<% end %>
 <% end %>
 	

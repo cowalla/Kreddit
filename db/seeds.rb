@@ -2,7 +2,7 @@
 
 ActiveRecord::Base.transaction do
   
-  User.new(:username => "the_help", :password => "trytoguess").save!
+  User.new(:username => "SeedyMcSeedSeed", :password => "seedseedseedseed").save!
   Subreddit.new(:title => "Main", :user_id => 1).save!
   Subreddit.new(:title => "Pics", :user_id => 1).save!
   Subreddit.new(:title => "Funny", :user_id => 1).save!

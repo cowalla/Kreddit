@@ -8,12 +8,12 @@ RedditApp.Routers.Router = Backbone.Router.extend({
 	newPost: function (obj) {
 	  console.log("I was called")
 	  var view = new RedditApp.Views.NewPost(obj);
-	  this.$rootEl.html(view.render().$el);
+	  this._swapView(view);
 	},
 	
 	watching: function (obj) {
 	  var view = new RedditApp.Views.Watching(obj);
-	  this.$rootEl.html(view.render().$el);
+	  this._swapView(view);
 	},
 
 	_swapView: function (view){

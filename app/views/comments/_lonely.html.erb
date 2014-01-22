@@ -1,6 +1,5 @@
 <div class="comment-section">
 	
-	<%@vote_link = nil %>
 	<%@vote_comment = comment %>
 	<%comment_votes = comment.votes%>
 	<%comment_upvotes = comment_votes.select{|vote| vote.value == 1 }%>
@@ -11,7 +10,7 @@
 		name="authenticity_token"
 		value="<%=form_authenticity_token%>">
 		
-	<%= render partial: "vote" %>
+	<%= render partial: "votes/vote" %>
 	</form>
 
 <% user = User.find(comment.user_id) %>

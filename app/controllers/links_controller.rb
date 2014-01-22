@@ -11,6 +11,7 @@ class LinksController < ApplicationController
     @upvotes = @votes.select{ |vote| vote.value == 1 }
     @downvotes = @votes.select{ |vote| vote.value == -1 }
     @link_karma = (@upvotes.count - @downvotes.count)
+    @subreddit = Subreddit.new()
   end
   
   def new
