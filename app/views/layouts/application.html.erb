@@ -30,34 +30,25 @@
 	</script>
 	<script>
 	$(document).ready(function(){
-		var that = this;
-		$.ajax({
-			type: "GET",
-			url: "/user_links",
-			success: function (data) {
-				$(data).each(function(index, userLink){
-					$.ajax({
-						type: "GET",
-						url: "/links/" + userLink['link_id'],
-						success: function (linkData){
-							console.log("successfully fetched linkdata");
-							$(".button-holder[data-id="+ userLink['link_id'] +"]").html(
-								"<div class='unwatch-button btn btn-primary' data-id="+ userLink['link_id'] +" data-thumb="+linkData["avatar_file_name"]+" data-description="+ linkData['description'] +">Unwatch</div>"
-							);
-							$(".watched-posts").append(
-								"<div class='image-holder' data-id=" + userLink['link_id'] +"><img data-id=" + userLink['link_id'] +" src="+ linkData["avatar_file_name"] +">"+linkData['description']+"</img></div>"
-							);
-						},
-						error: function(){
-							console.log("couldnt fetch linkdata");
-							$(".button-holder[data-id="+ userLink['link_id'] +"]").html(
-								"<div class='watch-button btn btn-primary' data-id="+ userLink['link_id'] +">Watch</div>"
-								);
-						}
-					});
-				});
-			}
-		});
+		
+		$(".button-holder").each(function(index, link_button){
+			var that = this;
+			$.ajax({
+				type: "GET",
+				url: "/user_links",
+				data: {
+					user_link: {
+						link_id: link_button["link_id"]
+					}
+				},
+				success: function (data) {
+					$(that).addClass("unwatch-button btn btn-primary").removeClass("watch-button").text("Unwatch");
+				},
+				error: function (){
+					console.log("record is not in the database of watched posts");
+				}
+			})
+		})
 		
 		var checkElt = function(elt, inputId){
 			var children = $(elt.children());
@@ -81,7 +72,6 @@
 				that.removeClass('watch-button').addClass('unwatch-button');
 				that.html('Unwatch');
 				console.log("beginning AJAX creation...");
-				console.log(that.data("id"));
 				$.ajax({
 					type: "POST",
 					url: "/user_links",
@@ -100,28 +90,24 @@
 		
 		$("body").on("click", ".unwatch-button", function(event){
 			var that = $(event.target);
-			console.log(that);
 			console.log("using 'unwatch' button event")
-			if(!checkElt($(".watched-posts"), that.data("id"))){
-				console.log("removing...");
-				$(".image-holder[data-id=" + that.data("id") + "]").remove();
-				that.removeClass('unwatch-button').addClass('watch-button');
-				that.html('Watch');
-				console.log("trying AJAX delete...")
-					$.ajax({
-						type: "DELETE",
-						url: "/user_link",
-						data: {
-							user_link: {
-							link_id: that.data("id"),
-							user_id: null
-							}
-						},
-						success: function(){
-							console.log("DELETED A JOIN TABLE ENTRY");
-						}
-					});
-			};
+			$(".image-holder[data-id=" + that.data("id") + "]").remove();
+			that.removeClass('unwatch-button').addClass('watch-button');
+			that.html('Watch');
+			console.log("trying AJAX delete...")
+			$.ajax({
+				type: "DELETE",
+				url: "/user_link",
+				data: {
+					user_link: {
+						link_id: that.data("id"),
+						user_id: null
+					}
+				},
+				success: function(){
+					console.log("DELETED A JOIN TABLE ENTRY");
+				}
+			});
 		});	
 		
 	});
