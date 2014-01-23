@@ -5,6 +5,11 @@ class UserLinksController < ApplicationController
     render :json => @user_links
   end
   
+  def show
+    @user_link = UserLink.where({:user_id => current_user.id, :link_id => params[:user_link][:link_id]})
+    render :json => @user_link
+  end
+  
   
   def create
     params[:user_link][:user_id] = current_user.id

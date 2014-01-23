@@ -32,15 +32,10 @@
 	$(document).ready(function(){
 		
 		$(".button-holder").each(function(index, link_button){
-			var that = this;
+			var that = $($(link_button).children()[0]);
 			$.ajax({
 				type: "GET",
-				url: "/user_links",
-				data: {
-					user_link: {
-						link_id: link_button["link_id"]
-					}
-				},
+				url: "/user_links/" + that["link_id"],
 				success: function (data) {
 					$(that).addClass("unwatch-button btn btn-primary").removeClass("watch-button").text("Unwatch");
 				},
@@ -48,44 +43,29 @@
 					console.log("record is not in the database of watched posts");
 				}
 			})
-		})
-		
-		var checkElt = function(elt, inputId){
-			var children = $(elt.children());
-			var flag = true;
-			children.each(function(index, child){
-				if($(child).data("id") == inputId){
-					flag = false;
-				};
-			});
-			console.log(flag);
-			return flag;
-		};
+		});
 		
 		$("body").on("click", ".watch-button", function(event){
-			var that = $(event.target);
 			console.log("using 'watch' button event");
-			if(checkElt($(".watched-posts"), that.data("id"))){
-				$(".watched-posts").append(
-					"<div class='image-holder' data-id=" + that.data("id") +"><img data-id=" + that.data("id") +" src="+ that.data("avatar") +">"+that.data('description')+"</img></div>"
-					);
-				that.removeClass('watch-button').addClass('unwatch-button');
-				that.html('Unwatch');
-				console.log("beginning AJAX creation...");
-				$.ajax({
-					type: "POST",
-					url: "/user_links",
-					data: {
-						user_link: {
-							link_id: that.data("id"),
-							user_id: null
-						}
-					},
-					success: function(){
-						console.log("CREATED A JOIN TABLE ENTRY");
+			var that = $(event.target);
+			$(".watched-posts").append(
+				"<div class='image-holder' data-id=" + that.data("id") +"><img data-id=" + that.data("id") +" src="+ that.data("avatar") +">"+that.data('description')+"</img></div>"
+				);
+			that.removeClass('watch-button').addClass('unwatch-button').text('Unwatch');
+			console.log("beginning AJAX creation...");
+			$.ajax({
+				type: "POST",
+				url: "/user_links",
+				data: {
+					user_link: {
+						link_id: that.data("id"),
+						user_id: null
 					}
-				});
-			};
+				},
+				success: function(){
+					console.log("CREATED A JOIN TABLE ENTRY");
+				}
+			});
 		});
 		
 		$("body").on("click", ".unwatch-button", function(event){
@@ -93,7 +73,7 @@
 			console.log("using 'unwatch' button event")
 			$(".image-holder[data-id=" + that.data("id") + "]").remove();
 			that.removeClass('unwatch-button').addClass('watch-button');
-			that.html('Watch');
+			that.text('Watch');
 			console.log("trying AJAX delete...")
 			$.ajax({
 				type: "DELETE",

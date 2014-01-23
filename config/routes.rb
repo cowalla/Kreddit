@@ -7,7 +7,7 @@ resources :subreddits, :only => [:create, :new, :show, :index, :main]
 resource :session, :only => [:new, :create, :destroy]
 resources :comments, :only => [:create]
 resources :votes, :only => [:create, :destroy]
-resources :user_links, :only => [:create, :destroy, :index]
+resources :user_links, :only => [:create, :destroy, :index, :show]
 
 root :to => "subreddits#main"
 
