@@ -40,13 +40,12 @@
 						type: "GET",
 						url: "/links/" + userLink['link_id'],
 						success: function (linkData){
-							debugger
 							console.log("successfully fetched linkdata");
 							$(".button-holder[data-id="+ userLink['link_id'] +"]").html(
-								"<div class='unwatch-button btn btn-primary' data-id="+ userLink['link_id'] +" data-thumb="+linkData["avatar['thumb']"]+" data-description="+ linkData['description'] +">Unwatch</div>"
+								"<div class='unwatch-button btn btn-primary' data-id="+ userLink['link_id'] +" data-thumb="+linkData["avatar_file_name"]+" data-description="+ linkData['description'] +">Unwatch</div>"
 							);
 							$(".watched-posts").append(
-								"<div class='image-holder' data-id=" + userLink['link_id'] +"><img data-id=" + userLink['link_id'] +" src="+ linkData["avatar"] +">"+linkData['description']+"</img></div>"
+								"<div class='image-holder' data-id=" + userLink['link_id'] +"><img data-id=" + userLink['link_id'] +" src="+ linkData["avatar_file_name"] +">"+linkData['description']+"</img></div>"
 							);
 						},
 						error: function(){
@@ -72,7 +71,7 @@
 			return flag;
 		};
 		
-		$(".watch-button").click(function(event){
+		$("body").on("click", ".watch-button", function(event){
 			var that = $(event.target);
 			console.log("using 'watch' button event");
 			if(checkElt($(".watched-posts"), that.data("id"))){
@@ -99,13 +98,12 @@
 			};
 		});
 		
-		$(".unwatch-button").click(function(event){
+		$("body").on("click", ".unwatch-button", function(event){
 			var that = $(event.target);
 			console.log(that);
 			console.log("using 'unwatch' button event")
 			if(!checkElt($(".watched-posts"), that.data("id"))){
 				console.log("removing...");
-				console.log($("div[data-id=" + that.data("id") + "]"));
 				$(".image-holder[data-id=" + that.data("id") + "]").remove();
 				that.removeClass('unwatch-button').addClass('watch-button');
 				that.html('Watch');

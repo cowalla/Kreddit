@@ -12,6 +12,12 @@ class LinksController < ApplicationController
     @downvotes = @votes.select{ |vote| vote.value == -1 }
     @link_karma = (@upvotes.count - @downvotes.count)
     @subreddit = Subreddit.new()
+    
+    respond_to do |format|
+      format.json { render :json => @link }
+      format.html
+    end
+
   end
   
   def new
