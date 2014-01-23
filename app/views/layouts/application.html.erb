@@ -30,6 +30,35 @@
 	</script>
 	<script>
 	$(document).ready(function(){
+		var that = this;
+		$.ajax({
+			type: "GET",
+			url: "/user_links",
+			success: function (data) {
+				$(data).each(function(index, userLink){
+					$.ajax({
+						type: "GET",
+						url: "/links/" + userLink['link_id'],
+						success: function (linkData){
+							debugger
+							console.log("successfully fetched linkdata");
+							$(".button-holder[data-id="+ userLink['link_id'] +"]").html(
+								"<div class='unwatch-button btn btn-primary' data-id="+ userLink['link_id'] +" data-thumb="+linkData["avatar['thumb']"]+" data-description="+ linkData['description'] +">Unwatch</div>"
+							);
+							$(".watched-posts").append(
+								"<div class='image-holder' data-id=" + userLink['link_id'] +"><img data-id=" + userLink['link_id'] +" src="+ linkData["avatar"] +">"+linkData['description']+"</img></div>"
+							);
+						},
+						error: function(){
+							console.log("couldnt fetch linkdata");
+							$(".button-holder[data-id="+ userLink['link_id'] +"]").html(
+								"<div class='watch-button btn btn-primary' data-id="+ userLink['link_id'] +">Watch</div>"
+								);
+						}
+					});
+				});
+			}
+		});
 		
 		var checkElt = function(elt, inputId){
 			var children = $(elt.children());
@@ -45,14 +74,28 @@
 		
 		$(".watch-button").click(function(event){
 			var that = $(event.target);
-			console.log("using 'watch' button event")
+			console.log("using 'watch' button event");
 			if(checkElt($(".watched-posts"), that.data("id"))){
-				console.log("appending...");
 				$(".watched-posts").append(
-					"<div class='image-holder' data-id=" + that.data("id") +"><img data-id=" + that.data("id") +" src="+ that.data("thumb") +">"+that.data('description')+"</img></div>"
+					"<div class='image-holder' data-id=" + that.data("id") +"><img data-id=" + that.data("id") +" src="+ that.data("avatar") +">"+that.data('description')+"</img></div>"
 					);
 				that.removeClass('watch-button').addClass('unwatch-button');
 				that.html('Unwatch');
+				console.log("beginning AJAX creation...");
+				console.log(that.data("id"));
+				$.ajax({
+					type: "POST",
+					url: "/user_links",
+					data: {
+						user_link: {
+							link_id: that.data("id"),
+							user_id: null
+						}
+					},
+					success: function(){
+						console.log("CREATED A JOIN TABLE ENTRY");
+					}
+				});
 			};
 		});
 		
@@ -66,9 +109,22 @@
 				$(".image-holder[data-id=" + that.data("id") + "]").remove();
 				that.removeClass('unwatch-button').addClass('watch-button');
 				that.html('Watch');
+				console.log("trying AJAX delete...")
+					$.ajax({
+						type: "DELETE",
+						url: "/user_link",
+						data: {
+							user_link: {
+							link_id: that.data("id"),
+							user_id: null
+							}
+						},
+						success: function(){
+							console.log("DELETED A JOIN TABLE ENTRY");
+						}
+					});
 			};
-		});
-		
+		});	
 		
 	});
 	</script>
@@ -101,8 +157,8 @@
 
 		<div class="col-lg-9">
 			<div class="panel">
-		<%= yield %>
-		</div>
+				<%= yield %>
+			</div>
 		</div>
 	
 		<div class="col col-lg-2 sidebar-replace">

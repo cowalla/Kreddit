@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   attr_reader :password
   
   has_many :subreddits
+  has_many :watched_links, :through => :user_links, :source => :link
+  has_many :user_links
   has_many :links
   has_many :comments
   has_many :votes

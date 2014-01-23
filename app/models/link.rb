@@ -5,6 +5,8 @@ class Link < ActiveRecord::Base
   has_many :votes
   has_many :comments, :dependent => :destroy
   has_many :subreddit_links
+  has_many :user_links
+  has_many :watchers, :through => :user_links, :source => :user
   has_many :subreddits, :through => :subreddit_links, :source => :subreddit
   
   def self.parent_comments(comments)

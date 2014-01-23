@@ -53,15 +53,27 @@
 					</div>
 				</div>
 					<div class="col-xs-1">
-					<div class="watch-button btn btn-primary" data-id="<%= link.id %>" data-thumb="<%= link.avatar(:thumb) %>" data-description="<%= link.description[0..15] + "..." %>">
-						Watch
+						<div class="button-holder" data-id="<%= link.id %>">
+							<div class="watch-button btn btn-primary" data-id="<%= link.id %>" data-avatar="<%= link.avatar(:thumb) %>">
+								Watch
+							</div>
 						</div>
-						</div>
+					</div>
 			</div>
 			<% end %>
 			<%= paginate @links %>
 			
 		</div>
+	
+		<script>
+			$.ajax({
+				type: "GET",
+				url: "/user_links",
+				success: function (data) {
+					console.log(data);
+				}
+			});
+		</script>
 	
 	</div>	
 		
