@@ -2,10 +2,10 @@ class Link < ActiveRecord::Base
   attr_accessible :url, :description, :user_id, :avatar
   has_attached_file :avatar, :styles => { :medium => "300x300#", :thumb => "50x50#" }, :default_url => "https://cdn3.iconfinder.com/data/icons/umar/Reddit.png"
   belongs_to :user
-  has_many :votes
+  has_many :votes, :dependent => :destroy
   has_many :comments, :dependent => :destroy
-  has_many :subreddit_links
-  has_many :user_links
+  has_many :subreddit_links, :dependent => :destroy
+  has_many :user_links, :dependent => :destroy
   has_many :watchers, :through => :user_links, :source => :user
   has_many :subreddits, :through => :subreddit_links, :source => :subreddit
   

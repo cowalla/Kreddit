@@ -3,7 +3,7 @@
 
 
 <head>
-  <title>RedditClone</title>
+  <title>Kreddit</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -14,7 +14,7 @@
 		   document.cookie = $(this).offset().top;
 		});
 	});
-	console.log(document.cookie)
+	console.log(document.cookie);
 	$("html").scrollTop(document.cookie);
 	
 	</script>
@@ -31,110 +31,104 @@
 	<script>
 	$(document).ready(function(){
 		
-		$(".button-holder").each(function(index, link_button){
-			var that = $($(link_button).children()[0]);
-			$.ajax({
-				type: "GET",
-				url: "/user_links/" + that["link_id"],
-				success: function (data) {
-					$(that).addClass("unwatch-button btn btn-primary").removeClass("watch-button").text("Unwatch");
-				},
-				error: function (){
-					console.log("record is not in the database of watched posts");
-				}
-			});
-		});
-		
-		$("body").on("click", ".watch-button", function(event){
-			console.log("using 'watch' button event");
-			var that = $(event.target);
-			$(".watched-posts").append(
-				"<div class='image-holder' data-id=" + that.data("id") +"><img data-id=" + that.data("id") +" src="+ that.data("avatar") +">"+that.data('description')+"</img></div>"
-				);
-			that.removeClass('watch-button').addClass('unwatch-button').text('Unwatch');
-			console.log("beginning AJAX creation...");
-			$.ajax({
-				type: "POST",
-				url: "/user_links",
-				data: {
-					user_link: {
-						link_id: that.data("id"),
-						user_id: null
+		$.ajax({
+			url: "/user_links",
+			success: function(data){
+				data.forEach(function(userLinkData, index){
+					$(".watch-button[data-link-id="+ userLinkData["link_id"] +"]")
+					.addClass("unwatch-button btn btn-primary")
+					.removeClass("watch-button")
+					.text("Unwatch")
+					.attr('data-ul-id', userLinkData["id"]);
 					}
-				},
-				success: function(){
-					console.log("CREATED A JOIN TABLE ENTRY");
+				)}
+			});
+			
+		$("body").on("click", ".watch-button", function(event){
+			var clickedButton = $(event.target);
+			var userlinkLinkId = clickedButton.data("link-id");
+			$.ajax({
+				type: 'post',
+				url: '/user_links',
+				data: { link_id: userlinkLinkId, user_id: "1" },
+				success: function(data){
+					debugger
+					console.log("posted");
 				}
 			});
 		});
 		
 		$("body").on("click", ".unwatch-button", function(event){
-			var that = $(event.target);
-			console.log("using 'unwatch' button event")
-			$(".image-holder[data-id=" + that.data("id") + "]").remove();
-			that.removeClass('unwatch-button').addClass('watch-button');
-			that.text('Watch');
-			console.log("trying AJAX delete...")
+			event.preventDefault();
+			var clickedButton = $(event.target);
+			var userlinkid = clickedButton.data("ul-id");
 			$.ajax({
-				type: "DELETE",
-				url: "/user_links/" + that.data("id"),
+				type: 'delete',
+				url: '/user_links/' + userlinkid,
 				success: function(){
-					console.log("DELETED A JOIN TABLE ENTRY");
+					console.log("deleted!");
+					clickedButton.addClass("watch-button")
+					.removeClass("unwatch-button")
+					.text("Watch");
 				}
 			});
-		});	
+		});
 		
+	
 	});
 	</script>
+	
 
 </head>
+
+
 <header>
+	<div class="navbar-top-fixed">
+		<font size="100"> Kreddit </font> 
+	</div>
 	<% @top_subreddits = Subreddit.all%>
 
 		<ul class="nav nav-pills">
 		<% @top_subreddits.each do |subreddit| %>
 		<li>
-		<%= link_to subreddit.title, subreddit_url(subreddit) %>
+		<a href="<%=subreddit_url(subreddit) %>"><%=subreddit.title%></a>
 		</li>	
 		<% end %>
-		<div class="navbar navbar-right">
+		<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+	<li><div class="navbar">
 		<% if !!current_user %>
+		<div>
 		    <b>Logged in as: <%=link_to current_user.username, user_url(current_user) %></b>
-		    <b><%= button_to "Logout", session_url, :method => :delete %></b
-		<%else%>
-			<b><%= link_to "Sign In", new_session_url %></b>
-			<b><%= link_to "Sign Up", new_user_url %></b>
+			<%= button_to "Logout", session_url, :method => :delete %>
+		</div>
 		<% end %>
-		</nav>	
+		</div></li>
+		</ul>	
 
 </header>
 
 <body>
-<div class="container">
-	<div class="row">
-
+	<div class="container">
 		<div class="col-lg-9">
-			<div class="panel">
-				<%= yield %>
-			</div>
+			<%= yield %>
 		</div>
-	
+
 		<div class="col col-lg-2 sidebar-replace">
 			<div class="list-group">
-			<%= render "subreddits/sidebarContent" %>
+				<%= render "subreddits/sidebarContent" %>
 			</div>
 		</div>
-	</div>
-</div>
-<div class="navbar navbar-default navbar-fixed-bottom">
-	<div class="col col-lg-1">
-		<div class="list-group">
-		<%= render "sidebars/subreddit" %>
+
+		<div class="navbar navbar-default navbar-fixed-bottom">
+			<div class="col col-lg-1">
+				<div class="list-group">
+					<%= render "sidebars/subreddit" %>
+				</div>
+			</div>
+		</div>
+		<div class="watched-posts">
 		</div>
 	</div>
-	<div class="watched-posts">
-		</div>
-</div>
 </body>
 
 </html>

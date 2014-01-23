@@ -1,0 +1,18 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">You have to be signed in to do that!</h4>
+      </div>
+      <div class="modal-body">
+		<%= render "sessions/new" %>
+			To watch posts, you must have an account with us. If you don't have an account (or don't want to use the
+			<%= link_to "demo" %> account), consider <%= link_to "signing up", new_user_url %>.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Leave me alone</button>
+      </div>
+    </div>
+  </div>
+</div>

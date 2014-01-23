@@ -1,11 +1,30 @@
 <% if !!current_user %>
-
 <%= render :partial => "links/new" %>
-<% else %>	
+<% else %>
+<form method="/sessions" action="POST">
+	
+	<input type="hidden"
+	name="authenticity_token"
+	value="<%=form_authenticity_token%>">
+	
+  <input
+     id="user_username"
+     name="user[username]"
+     type="text">
+	
+  <input
+     id="user_password"
+     name="user[password]"
+     type="hidden">
+	
+	<input class="btn btn primary" type="submit" value="BE MY GUEST">
+</form>
 
 
-<h4> OR </h4>
+
+<h4> OR </h4>	
 <h2><%= link_to "Sign Up", new_user_url %></h2>
+<h4> OR </h4>
 <%=	render :partial => "sessions/new" %>
 
 <% end %>

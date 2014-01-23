@@ -1,11 +1,11 @@
 
-<div class="comment-block col-xs-9">
+<div class="comment-block">
 	<%@vote_comment = parent %>
 	<%comment_votes = parent.votes%>
 	<%comment_upvotes = comment_votes.select{|vote| vote.value == 1 }%>
 	<%comment_downvotes = comment_votes.select{|vote| vote.value == -1 }%>
 	<%@c_karma = (comment_upvotes.count - comment_downvotes.count)%>
-	<div class="col-xs-1">
+	<div>
 	<form action= "/votes" method="POST">
 		<input type="hidden"
 		name="authenticity_token"
@@ -14,12 +14,8 @@
 	<%= render partial: "votes/vote", :locals => { :subreddit => @subreddit } %>
 	</form>
 	</div>
-	<spacer class="col-xs-1">
-		</spacer>
 <% parent_user = User.find(parent.user_id) %>
  <%= link_to parent_user.username, user_url(parent_user) %>: <%= parent.body%><br>
-	<spacer class="col-xs-1">
-		</spacer>
 	<div class="form-hidden">
 	<form action="/comments" method="post">
 	
@@ -49,8 +45,7 @@
 </div>
 	<% children.each do |comment, value| %>
 	<br>
-	<div class="row-xs-7">
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<div>
  	<%= render partial: "comments/comment", :locals => { parent: comment, children: comment.comments }%> 
 	</div>
 	<br>

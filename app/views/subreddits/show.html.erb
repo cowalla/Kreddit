@@ -1,83 +1,31 @@
 <h2><%= @subreddit.title %></h2>
 
+<% @links.each do |link| %>
+	<div data-id="<%= link.id %>">
+	<% comment_count = link.comments.length %>
+	<% submitting_user = User.find(link.user_id) %>
+	<% votes = link.votes %>
+	<% upvotes = votes.select{ |vte| vte.value == 1 } %>
+	<% downvotes = votes.select{ |vte| vte.value == -1 } %>
+	<% @link_karma = (upvotes.count - downvotes.count) %>
+	<% @tmp_comment = nil %>
+	<% @comment = nil %>
+		<form action= "/votes" method="POST">
+			<input type="hidden"
+			name="authenticity_token"
+			value="<%=form_authenticity_token%>">
+			<% @link = link %>
 
-<div id='content'>
-	<div class="row">
-	
-		<div class="links col-lg-9">
-		<% @links.each do |link| %>
-			<div class="link-box col-xs-9" data-id="<%= link.id %>">
-				<% comment_count = link.comments.length %>
-				<% submitting_user = User.find(link.user_id) %>
-				<% votes = link.votes %>
-				<% upvotes = votes.select{ |vte| vte.value == 1 } %>
-				<% downvotes = votes.select{ |vte| vte.value == -1 } %>
-				<% @link_karma = (upvotes.count - downvotes.count) %>
-				<% @tmp_comment = nil %>
-				<% @comment = nil %>
-				<form action= "/votes" method="POST">
-					<input type="hidden"
-					name="authenticity_token"
-					value="<%=form_authenticity_token%>">
-				<% @link = link %>
-				<%= render partial: "votes/vote" %>
-				</form>
-		
-				<spacer class="col-xs-1">
-				</spacer>
-			
-				<div class="col-xs-1">
-					<%= image_tag link.avatar.url(:thumb) %>
-				</div>
-				
-				<spacer class="col-xs-1">
-				</spacer>
-			
-				<div class = "col-xs-7">
-					<div>
-					<% if link.avatar.url == "https://cdn3.iconfinder.com/data/icons/umar/Reddit.png" %>
-						<%=link_to link.description,  link.url %>
-					<% else %>
-						<%=link_to link.description, link.avatar.url %>
-					<% end %>
-					Submitted by: <%=link_to submitting_user.username, user_url(submitting_user) %>
-					</div>
-					<div>
-					<%=link_to "#{comment_count} " + "comments", link_url(link) %>
-					<font size="1"><%= ((Time.now - link.created_at)/3600).round %> hours ago </font>
-					<font size="1"><%= "to:" unless link.subreddits.length == 1%>
-						<% link.subreddits.each do |subreddit| %>
-						<%= link_to subreddit.title, subreddit_url(subreddit) unless subreddit.id == 1%>
-						<% end %>
-					</font>
-					</div>
-				</div>
-					<div class="col-xs-1">
-						<div class="button-holder" data-id="<%= link.id %>">
-							<div class="watch-button btn btn-primary" data-id="<%= link.id %>" data-avatar="<%= link.avatar(:thumb) %>" data-description="<%= link.description[0..15] %>">
-								Watch
-							</div>
-						</div>
-					</div>
-			</div>
-			<% end %>
-			<%= paginate @links %>
-			
-		</div>
-	
-		<script>
-			$.ajax({
-				type: "GET",
-				url: "/user_links",
-				success: function (data) {
-					console.log(data);
-				}
-			});
-		</script>
-	
-	</div>	
-		
-</div>
+			<%= render :partial => "links/detail", :locals => { :link => link, :submitting_user => submitting_user,
+			:comment_count => comment_count } %>
+		</form>
+	</div>
+<% end %>
+<%= paginate @links %>
+
+
+
+
 	
 	
 	

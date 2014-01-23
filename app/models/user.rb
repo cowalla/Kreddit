@@ -5,11 +5,11 @@ class User < ActiveRecord::Base
   
   has_many :subreddits
   has_many :watched_links, :through => :user_links, :source => :link
-  has_many :user_links
+  has_many :user_links, :dependent => :destroy
   has_many :links
   has_many :comments
   has_many :votes
-  has_many :subreddits
+  has_many :subreddits, :dependent => :destroy
   
   validates :password_digest, :presence => { :message => "Password can't be blank" }
   validates :password, :length => { :minimum => 6, :allow_nil => true }

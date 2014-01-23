@@ -13,3 +13,17 @@
  */
 
 @import "bootstrap";
+
+body {
+	background-color:#FFFFFF;
+}
+
+.display-inline-block {
+	display:inline-block;
+}
+
+.vote {
+	margin-right: 20px;
+}
+
+/* make each item that you want to stay on one line together have display:inline-block */
