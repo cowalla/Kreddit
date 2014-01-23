@@ -1,24 +1,2 @@
 
-<div class="head">
-	<script type="text/javascript" charset="utf-8">
-	$(function () {
-		that = $('.nav-sidebar');
-		var targetDiv = $(".sidebar-favorites");
-		that.on('click', 'li', function (event) {
-			var action = $(event.currentTarget).data('action');
-			RedditApp.router[action](targetDiv);
-		});
-	});
-	</script>
-</div>
-
-<div class="sidebar">
-
-	<div class="btn btn-primary">Watched Posts</div>
-	<div class="sidebar-content">
-		</div>
-</div>
-<div class="sidebar-favorites">
-</div>
-</div>
 

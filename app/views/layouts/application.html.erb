@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+
+
 <head>
   <title>RedditClone</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
@@ -16,7 +18,16 @@
 	$("html").scrollTop(document.cookie);
 	
 	</script>
-	
+	<script type="text/javascript" charset="utf-8">
+	$(function () {
+		that = $('.nav-sidebar');
+		var targetDiv = $(".sidebar-favorites");
+		that.on('click', 'li', function (event) {
+			var action = $(event.currentTarget).data('action');
+			RedditApp.router[action](targetDiv);
+		});
+	});
+	</script>
 	<script>
 	$(document).ready(function(){
 		
@@ -24,29 +35,41 @@
 			var children = $(elt.children());
 			var flag = true;
 			children.each(function(index, child){
-				console.log($(child).data("id"));
-				console.log(inputId);
 				if($(child).data("id") == inputId){
 					flag = false;
 				};
 			});
+			console.log(flag);
 			return flag;
 		};
 		
 		$(".watch-button").click(function(event){
 			var that = $(event.target);
-			if(!checkElt($(".watched-posts"), that.data("id"))){
-				console.log("removing...");
-				$(".watched-post[data-id=" + that.data("id") + "]").remove();
-			} else {
+			console.log("using 'watch' button event")
+			if(checkElt($(".watched-posts"), that.data("id"))){
 				console.log("appending...");
 				$(".watched-posts").append(
-					"<div class='watched-post btn btn-default' data-id="+ that.data("id") +"> " + that.data("description") + " </div>");
-			}
-
-
-
+					"<div class='image-holder' data-id=" + that.data("id") +"><img data-id=" + that.data("id") +" src="+ that.data("thumb") +">"+that.data('description')+"</img></div>"
+					);
+				that.removeClass('watch-button').addClass('unwatch-button');
+				that.html('Unwatch');
+			};
 		});
+		
+		$(".unwatch-button").click(function(event){
+			var that = $(event.target);
+			console.log(that);
+			console.log("using 'unwatch' button event")
+			if(!checkElt($(".watched-posts"), that.data("id"))){
+				console.log("removing...");
+				console.log($("div[data-id=" + that.data("id") + "]"));
+				$(".image-holder[data-id=" + that.data("id") + "]").remove();
+				that.removeClass('unwatch-button').addClass('watch-button');
+				that.html('Watch');
+			};
+		});
+		
+		
 	});
 	</script>
 

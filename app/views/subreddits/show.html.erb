@@ -53,9 +53,9 @@
 					</div>
 				</div>
 					<div class="col-xs-1">
-					<button class="watch-button btn btn-primary" data-id="<%= link.id %>" data-description="<%= link.description[0..15] %>">
+					<div class="watch-button btn btn-primary" data-id="<%= link.id %>" data-thumb="<%= link.avatar(:thumb) %>" data-description="<%= link.description[0..15] + "..." %>">
 						Watch
-						</button>
+						</div>
 						</div>
 			</div>
 			<% end %>
