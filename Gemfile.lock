@@ -48,13 +48,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
-    columnize (0.3.6)
-    debugger (1.6.3)
-      columnize (>= 0.3.1)
-      debugger-linecache (~> 1.2.0)
-      debugger-ruby_core_source (~> 1.2.4)
-    debugger-linecache (1.2.0)
-    debugger-ruby_core_source (1.2.4)
     eco (1.0.0)
       coffee-script
       eco-source
@@ -156,7 +149,6 @@ DEPENDENCIES
   aws-sdk
   backbone-on-rails
   bcrypt-ruby (~> 3.0.0)
-  debugger
   faker
   figaro
   friendly_id

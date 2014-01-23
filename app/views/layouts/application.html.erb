@@ -42,7 +42,7 @@
 				error: function (){
 					console.log("record is not in the database of watched posts");
 				}
-			})
+			});
 		});
 		
 		$("body").on("click", ".watch-button", function(event){
@@ -77,13 +77,7 @@
 			console.log("trying AJAX delete...")
 			$.ajax({
 				type: "DELETE",
-				url: "/user_link",
-				data: {
-					user_link: {
-						link_id: that.data("id"),
-						user_id: null
-					}
-				},
+				url: "/user_links/" + that.data("id"),
 				success: function(){
 					console.log("DELETED A JOIN TABLE ENTRY");
 				}
