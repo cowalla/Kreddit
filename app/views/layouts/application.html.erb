@@ -35,18 +35,22 @@
 			url: "/user_links",
 			success: function(data){
 				data.forEach(function(userLinkData, index){
-					$(".watch-button[data-link-id="+ userLinkData["link_id"] +"]")
-					.addClass("unwatch-button btn btn-primary")
-					.removeClass("watch-button")
-					.text("Unwatch")
-					.attr('data-ul-id', userLinkData["id"]);
-					debugger
-					$(".watched-posts").append(
-						"<div class='thumbnail-holder' data-link-id=" + userLinkData["link_id"] +"><img class='watched-post' data-link-id=" + userLinkData["link_id"] +" src="+ userLinkData["url"] +">"+ userLinkData["description"] +"</img></div>"
-						);
-					
-					}
-				)}
+					$.ajax({
+						type: "GET",
+						url: "/links/" + userLinkData["link_id"],
+						success: function (linkData){
+								$(".watch-button[data-link-id="+ userLinkData["link_id"] +"]")
+								.addClass("unwatch-button btn btn-primary")
+								.removeClass("watch-button")
+								.text("Unwatch")
+								.attr('data-ul-id', userLinkData["id"]);
+								$(".watched-posts").append(
+									"<div class='thumbnail-holder' data-link-id=" + userLinkData["link_id"] +"><div class='watched-post' data-link-id=" + userLinkData["link_id"] +"><a href=/links/" + userLinkData["link_id"] + ">"+ linkData["description"].slice(0,16) +"... </a></img></div>"
+									);
+								}
+						})
+					})
+				}
 			});
 			
 		$("body").on("click", ".watch-button", function(event){
@@ -67,7 +71,7 @@
 					.attr("data-ul-id", data["id"]);
 					
 					$(".watched-posts").append(
-						"<div class='thumbnail-holder' data-link-id=" + userlinkLinkId +"><img class='watched-post' data-link-id=" + userlinkLinkId +" src="+ clickedButton.data("avatar") +">"+ clickedButton.data("description") +"</img></div>"
+						"<div class='thumbnail-holder' data-link-id=" + userlinkLinkId +"><div class='watched-post' data-link-id=" + userlinkLinkId +"><a href=/links/" + userlinkLinkId + " >"+ clickedButton.data("description") +"... </a></div>"
 						);
 				}
 			});
@@ -125,17 +129,18 @@
 </header>
 
 <body>
-	<div class="container">
-		<div class="col-lg-9">
+	<div class="container display-inline-block">
+		<div class="col col-md-9">
 			<%= yield %>
 		</div>
 
-		<div class="col col-lg-3 sidebar-replace">
+		<div class="col col-md-2 sidebar-replace">
 			<div class="list-group">
 				<%= render "subreddits/sidebarContent" %>
 			</div>
 		</div>
-		<div class="watched-posts navbar navbar-fixed-bottom display-inline-block">
+		
+		<div class="watched-posts navbar navbar-fixed-left col col-md-1">
 			<div class="watched-post-title display-inline-block">Watched Posts: </div>
 		</div>
 	</div>
