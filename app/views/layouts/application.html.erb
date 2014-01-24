@@ -129,19 +129,19 @@
 </header>
 
 <body>
-	<div class="container display-inline-block">
-		<div class="col col-md-9">
+	<div class="container">
+		<div class="content col col-md-9">
 			<%= yield %>
 		</div>
 
-		<div class="col col-md-2 sidebar-replace">
+		<div class="col col-md-2">
 			<div class="list-group">
 				<%= render "subreddits/sidebarContent" %>
 			</div>
 		</div>
 		
 		<div class="watched-posts navbar navbar-fixed-left col col-md-1">
-			<div class="watched-post-title display-inline-block">Watched Posts: </div>
+			<div class="watched-post-title">Watched Posts: </div>
 		</div>
 	</div>
 </body>

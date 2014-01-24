@@ -10,6 +10,7 @@
 	<% @link_karma = (upvotes.count - downvotes.count) %>
 	<% @tmp_comment = nil %>
 	<% @comment = nil %>
+		<div>
 		<form action= "/votes" method="POST">
 			<input type="hidden"
 			name="authenticity_token"

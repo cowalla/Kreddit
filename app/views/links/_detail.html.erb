@@ -1,10 +1,10 @@
 <div class="link-detail">
-	<div class="vote-holder display-inline-block">
+	<div class="vote-holder">
 	<%= render partial: "votes/vote" %>
 	<%= image_tag link.avatar.url(:thumb) %>
 	</div>
 
-	<div class="picture-thumb display-inline-block">
+	<div class="picture-thumb">
 		<% if link.avatar.url == "https://cdn3.iconfinder.com/data/icons/umar/Reddit.png" %>
 			<%=link_to link.description,  link.url %>
 		<% else %>
@@ -12,7 +12,7 @@
 		<% end %>
 		Submitted by: <%=link_to submitting_user.username, user_url(submitting_user) %>
 	</div>
-	<div class= "display-inline-block">
+	<div>
 		<%=link_to "#{comment_count} " + "comments", link_url(link) %>
 		<font size="1"><%= ((Time.now - link.created_at)/3600).round %> hours ago </font>
 		<font size="1"><%= "to:" unless link.subreddits.length == 1%></font>
@@ -20,9 +20,9 @@
 				<%= link_to subreddit.title, subreddit_url(subreddit) unless subreddit.id == 1%>
 		<% end %>
 	</div>
-	<div class="button-holder display-inline-block" data-id="<%= link.id %>">
+	<div class="button-holder" data-id="<%= link.id %>">
 		<% if !!current_user %>
-			<button class="watch-button btn btn-primary display-inline-block" 
+			<button class="watch-button btn btn-primary" 
 				data-link-id="<%= link.id %>" 
 				data-avatar="<%= link.avatar(:thumb) %>" 
 				data-description="<%= link.description[0..15] %>">
@@ -30,7 +30,7 @@
 			</button>
 		<% else %>
 			<!-- Button trigger modal -->
-			<button class="must-login btn btn-primary display-inline-block" 
+			<button class="must-login btn btn-primary" 
 				data-toggle="modal" 
 				data-target="#myModal">
 				Watch
