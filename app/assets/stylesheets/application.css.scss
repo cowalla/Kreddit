@@ -32,16 +32,22 @@ body {
 .main{
 	padding: 5px;
 	background: #eee;
-	height: 1000px;
+	height: 650px;
 }
 .vote-holder{
 	float:left;
 	padding: 5px;
 }
 
+.about{
+	float:right;
+	padding: 20px;
+	margin: 20px;
+}
+
 .watched-posts {
 	float:left;
-	height: 1000px;
+	height: 650px;
 	padding: 5px;
 	background: #FA5555;	
 }
@@ -65,7 +71,7 @@ body {
 .sidebar {
 	float:right;
 	padding: 5px;
-	height: 1000px;
+	height: 650px;
 	background: #84DA55
 }
 

@@ -1,13 +1,13 @@
 
 <div>
 	<div class="vote">
-	<form action= "/votes" method="POST">
-	<input type="hidden"
-	name="authenticity_token"
-	value="<%=form_authenticity_token%>">
+		<form action= "/votes" method="POST">
+			<input type="hidden"
+			name="authenticity_token"
+			value="<%=form_authenticity_token%>">
 	
-	<%= render partial: "votes/upvote" %>
-	</form>
+			<%= render partial: "votes/upvote" %>
+		</form>
 	
 		<%if !!@c_karma %>
 			<div class="score"><%= @c_karma %></div>
@@ -16,14 +16,11 @@
 		<% end %>
 	
 		<form action= "/votes" method="POST">
-		<input type="hidden"
-		name="authenticity_token"
-		value="<%=form_authenticity_token%>">
+			<input type="hidden"
+			name="authenticity_token"
+			value="<%=form_authenticity_token%>">
 	
-	<%= render partial: "votes/downvote" %>
-	
-
-	
+			<%= render partial: "votes/downvote" %>
 		</form>
 	</div>
 </div>

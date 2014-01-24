@@ -1,9 +1,9 @@
 <div class="link-detail">
 	<div class="vote-holder col col-xs-1">
-	<%= render partial: "votes/vote" %>
+		<%= render partial: "votes/vote" %>
 	</div>
 	<div class= "col col-xs-1">
-	<%= image_tag link.avatar.url(:thumb) %>
+		<%= image_tag link.avatar.url(:thumb) %>
 	</div>
 
 	<div class="col col-xs-9">
@@ -14,10 +14,10 @@
 				<%=link_to link.description, link.avatar.url %>
 			<% end %>
 		</div>
-		<div>
+		<div class="submitted-by">
 			Submitted by: <%=link_to submitting_user.username, user_url(submitting_user) %>
 		</div>
-		<div>
+		<div class="coment-count created-at">
 			<%=link_to "#{comment_count} " + "comments", link_url(link) %>
 			<font size="1"><%= ((Time.now - link.created_at)/3600).round %> hours ago </font>
 			<font size="1"><%= "to:" unless link.subreddits.length == 1%></font>
@@ -28,23 +28,25 @@
 	</div>
 	<div>
 	</div>
-	<div class="button-holder btn-comment" data-id="<%= link.id %>">
-		<% if !!current_user %>
-			<button class="watch-button btn btn-primary" 
-				data-link-id="<%= link.id %>" 
-				data-avatar="<%= link.avatar(:thumb) %>" 
-				data-description="<%= link.description[0..15] %>">
-				Watch
-			</button>
-		<% else %>
-			<!-- Button trigger modal -->
-			<button class="btn btn-primary" 
-				data-toggle="modal" 
-				data-target="#myModal">
-				Watch
-			</button>
-			<%= render :partial => "subreddits/modal" %>
-			
-		<% end %>
+		<div class="button-holder btn-comment" data-id="<%= link.id %>">
+			<% if !!current_user %>
+				<button class="watch-button btn btn-primary" 
+					data-link-id="<%= link.id %>" 
+					data-avatar="<%= link.avatar(:thumb) %>" 
+					data-description="<%= link.description[0..15] %>">
+					Watch
+				</button>
+			<% else %>
+				<!-- Button trigger modal -->
+				<button class="btn btn-primary" 
+					data-toggle="modal" 
+					data-target="#myModal">
+					Watch
+				</button>
+				<%= render :partial => "subreddits/modal" %>
+
+			<% end %>
+		</div>
+		
 	</div>
 </div>

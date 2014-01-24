@@ -8,8 +8,9 @@
       <div class="modal-body">
 		<%= render "sessions/new" %>
 			To watch posts, you must have an account with us. If you don't have an account (or don't want to use the
-			demo account), consider <%= link_to "signing up", new_user_url %>.
+demo account), consider <%= link_to "signing up", new_user_url %>.
       </div>
+		<%= render :partial => "users/demo" %>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Leave me alone</button>
       </div>

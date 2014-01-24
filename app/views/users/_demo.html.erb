@@ -1,0 +1,19 @@
+<form action="/session" method="POST">
+	
+	<input type="hidden"
+	name="authenticity_token"
+	value="<%=form_authenticity_token%>">
+	
+  <input
+     name="user[username]"
+	 value="Guest"
+     type="hidden">
+	
+  <input
+     id="user_password"
+     name="user[password]"
+	 value="iamaguest"
+     type="hidden">
+
+<input class="btn btn-primary" type="submit" value="SIGN IN AS GUEST">
+</form>

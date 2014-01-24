@@ -11,15 +11,10 @@
 	<% @tmp_comment = nil %>
 	<% @comment = nil %>
 	<div class="link-container">
-		<form action= "/votes" method="POST">
-			<input type="hidden"
-			name="authenticity_token"
-			value="<%=form_authenticity_token%>">
 			<% @link = link %>
 
 			<%= render :partial => "links/detail", :locals => { :link => link, :submitting_user => submitting_user,
 			:comment_count => comment_count } %>
-		</form>
 	</div>
 <% end %>
 <%= paginate @links %>

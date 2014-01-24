@@ -17,16 +17,6 @@
 	$("html").scrollTop(document.cookie);
 	
 	</script>
-	<script type="text/javascript" charset="utf-8">
-	$(function () {
-		that = $('.nav-sidebar');
-		var targetDiv = $(".sidebar-favorites");
-		that.on('click', 'li', function (event) {
-			var action = $(event.currentTarget).data('action');
-			RedditApp.router[action](targetDiv);
-		});
-	});
-	</script>
 	<script>
 	$(document).ready(function(){
 		
@@ -106,6 +96,11 @@
 	<div class="header-bottom-left">
 		<font size="100"> Kreddit </font> 
 		<font size="1"> The site for gifs...(and pictures!) </font>
+		<button class="btn btn-primary about"
+			data-toggle="modal"
+			data-target="#aboutModal">About</button>
+			<%= render :partial => "users/aboutmodal" %>	
+		
 	</div>
 	<% @top_subreddits = Subreddit.all%>
 
