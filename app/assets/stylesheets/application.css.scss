@@ -26,6 +26,14 @@ body {
 .picture-thumb {
 }
 
+.new{
+	border: 1px #e4e4e4 solid;
+  	padding: 20px;
+	border-radius: 4px;
+	box-shadow: 0 0 10px #ccc;
+	background-color: #fff;
+}
+
 .vote {
 }
 
@@ -41,6 +49,10 @@ body {
 	float:right;
 	padding: 20px;
 	margin: 20px;
+}
+
+.new-session{
+	border: 5px;
 }
 
 .watched-posts {
