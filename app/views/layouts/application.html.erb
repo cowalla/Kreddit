@@ -95,7 +95,7 @@
 <header>
 	<div class="header-bottom-left">
 		<font size="100"> Kreddit </font> 
-		<font size="1"> The site for gifs...(and pictures!) </font>
+		<font size="1"> A Reddit clone for gifs...(and pictures!) </font>
 		<button class="btn btn-primary about"
 			data-toggle="modal"
 			data-target="#aboutModal">About</button>
@@ -114,8 +114,8 @@
 	<li><div class="navbar">
 		<% if !!current_user %>
 		<div>
-		    <b>Logged in as: <%=link_to current_user.username, user_url(current_user) %></b>
-			<%= button_to "Logout", session_url, :method => :delete %>
+		    <b>Logged in as: <a href="<%=user_url(current_user)%>"><%=current_user.username%></a></b>
+			<%= button_to "logout", session_url, :method => :delete, :class => "btn btn-primary" %>
 		</div>
 		<% end %>
 	</li>

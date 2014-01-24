@@ -6,7 +6,7 @@ class SubredditsController < ApplicationController
   
   def show
     @subreddit = Subreddit.find(params[:id])
-    @links = @subreddit.links.page(params[:page]).per(5)
+    @links = @subreddit.links.page(params[:page]).per(6)
   end
   
   def create

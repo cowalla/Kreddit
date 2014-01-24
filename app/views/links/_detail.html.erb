@@ -1,4 +1,4 @@
-<div class="link-detail">
+<div class="link-detail row">
 	<div class="vote-holder col col-xs-1">
 		<%= render partial: "votes/vote" %>
 	</div>
@@ -6,7 +6,7 @@
 		<%= image_tag link.avatar.url(:thumb) %>
 	</div>
 
-	<div class="col col-xs-9">
+	<div class="col col-xs-6">
 		<div class="picture-thumb">
 			<% if link.avatar.url == "https://cdn3.iconfinder.com/data/icons/umar/Reddit.png" %>
 				<%=link_to link.description,  link.url %>
