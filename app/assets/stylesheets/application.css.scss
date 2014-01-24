@@ -12,6 +12,7 @@
  *= require_tree .
  */
 
+
 @import "bootstrap";
 
 body {
@@ -21,23 +22,31 @@ body {
 .display-inline-block {
 	display:inline-block;
 }
+
 .picture-thumb {
-	margin-right: 20px;
 }
 
 .vote {
-	margin-right: 20px;
+}
+
+.main{
+	padding: 5px;
+	background: #eee
 }
 
 .watched-posts {
-	margin-bottom: 100px;
+	float:left;
+	height: 1000px;
+	padding: 5px;
+	background: #FA5555;
+	
 }
 
-.content {
-	width: 600px;
-	margin: 20px;
-	padding: 20px;
-	background: #eee
+.sidebar {
+	float:right;
+	padding: 5px;
+	height: 1000px;
+	background: #84DA55
 }
 
 /* make each item that you want to stay on one line together have display:inline-block */

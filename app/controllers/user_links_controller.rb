@@ -14,7 +14,6 @@ class UserLinksController < ApplicationController
   
   def create
       params[:user_link][:user_id] = current_user.id
-      params[:user_link][:avatar] = Link.find(params[:user_link][:link_id]).avatar(:thumb)
       @user_link = UserLink.new(params[:user_link])
       if @user_link.save
         render :json => @user_link

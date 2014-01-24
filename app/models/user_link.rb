@@ -1,5 +1,5 @@
 class UserLink < ActiveRecord::Base
-  attr_accessible :user_id, :link_id, :avatar
+  attr_accessible :user_id, :link_id
   validates_uniqueness_of :user_id, :scope => [:link_id]
   
   belongs_to :user

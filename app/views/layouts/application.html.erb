@@ -45,7 +45,7 @@
 								.text("Unwatch")
 								.attr('data-ul-id', userLinkData["id"]);
 								$(".watched-posts").append(
-									"<div class='thumbnail-holder' data-link-id=" + userLinkData["link_id"] +"><div class='watched-post' data-link-id=" + userLinkData["link_id"] +"><a href=/links/" + userLinkData["link_id"] + ">"+ linkData["description"].slice(0,16) +"... </a></img></div>"
+									"<div class='thumbnail-holder' data-link-id=" + userLinkData["link_id"] +"><div class='watched-post' data-link-id=" + userLinkData["link_id"] +"><a href=/links/" + userLinkData["link_id"] + " class='btn btn-primary' >"+ linkData["description"].slice(0,16) +"... </a></img></div>"
 									);
 								}
 						})
@@ -71,7 +71,7 @@
 					.attr("data-ul-id", data["id"]);
 					
 					$(".watched-posts").append(
-						"<div class='thumbnail-holder' data-link-id=" + userlinkLinkId +"><div class='watched-post' data-link-id=" + userlinkLinkId +"><a href=/links/" + userlinkLinkId + " >"+ clickedButton.data("description") +"... </a></div>"
+						"<div class='thumbnail-holder' data-link-id=" + userlinkLinkId +"><div class='watched-post' data-link-id=" + userlinkLinkId +"><a href=/links/" + userlinkLinkId + " class='btn btn-primary'>"+ clickedButton.data("description") +"... </a></div>"
 						);
 				}
 			});
@@ -104,7 +104,7 @@
 
 
 <header>
-	<div class="navbar-top-fixed">
+	<div class="header-bottom-left">
 		<font size="100"> Kreddit </font> 
 	</div>
 	<% @top_subreddits = Subreddit.all%>
@@ -123,26 +123,28 @@
 			<%= button_to "Logout", session_url, :method => :delete %>
 		</div>
 		<% end %>
-		</div></li>
-		</ul>	
-
+	</li>
+		</ul>
+			
 </header>
 
-<body>
-	<div class="container">
-		<div class="content col col-md-9">
-			<%= yield %>
+<body>	
+	<div class="content row-fluid" role="main">
+		
+		<div class="watched-posts side col-xs-2">
+			<div class="watched-post-title">Watched Posts: </div>
 		</div>
-
-		<div class="col col-md-2">
+		
+		<div class="sidebar submit-post col-xs-2">
 			<div class="list-group">
 				<%= render "subreddits/sidebarContent" %>
 			</div>
 		</div>
 		
-		<div class="watched-posts navbar navbar-fixed-left col col-md-1">
-			<div class="watched-post-title">Watched Posts: </div>
+		<div class="main col-xs-8">
+			<%= yield %>
 		</div>
+		
 	</div>
 </body>
 

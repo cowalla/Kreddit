@@ -1,7 +1,7 @@
 <h2><%= @subreddit.title %></h2>
 
 <% @links.each do |link| %>
-	<div data-id="<%= link.id %>">
+	<div class="sitetable linklisting" data-id="<%= link.id %>">
 	<% comment_count = link.comments.length %>
 	<% submitting_user = User.find(link.user_id) %>
 	<% votes = link.votes %>
@@ -10,7 +10,7 @@
 	<% @link_karma = (upvotes.count - downvotes.count) %>
 	<% @tmp_comment = nil %>
 	<% @comment = nil %>
-		<div>
+	<div class="link-container">
 		<form action= "/votes" method="POST">
 			<input type="hidden"
 			name="authenticity_token"

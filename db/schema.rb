@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(:version => 20140123014931) do
   create_table "user_links", :force => true do |t|
     t.integer  "user_id",    :null => false
     t.integer  "link_id",    :null => false
-    t.string   "avatar",     :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

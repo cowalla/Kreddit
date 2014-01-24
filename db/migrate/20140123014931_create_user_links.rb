@@ -3,7 +3,6 @@ class CreateUserLinks < ActiveRecord::Migration
     create_table :user_links do |t|
       t.integer :user_id, :null => false
       t.integer :link_id, :null => false
-      t.string :avatar, :null => false
       
       t.timestamps
     end
