@@ -24,21 +24,15 @@
 			url: "/user_links",
 			success: function(data){
 				data.forEach(function(userLinkData, index){
-					$.ajax({
-						type: "GET",
-						url: "/links/" + userLinkData["link_id"],
-						success: function (linkData){
-								$(".watch-button[data-link-id="+ userLinkData["link_id"] +"]")
-								.addClass("unwatch-button btn btn-primary")
-								.removeClass("watch-button")
-								.text("Unwatch")
-								.attr('data-ul-id', userLinkData["id"]);
-								$(".watched-posts").append(
-									"<div class='thumbnail-holder' data-link-id=" + userLinkData["link_id"] +"><div class='watched-post' data-link-id=" + userLinkData["link_id"] +"><a href=/links/" + userLinkData["link_id"] + " class='btn btn-primary' >"+ linkData["description"].slice(0,16) +"... </a></img></div>"
-									);
-								}
+						$(".watch-button[data-link-id="+ userLinkData["link_id"] +"]")
+						.addClass("unwatch-button btn btn-primary")
+						.removeClass("watch-button")
+						.text("Unwatch")
+						.attr('data-ul-id', userLinkData["id"]);
+						$(".watched-posts").append(
+							"<div class='thumbnail-holder' data-link-id=" + userLinkData["link_id"] +"><div class='watched-post' data-link-id=" + userLinkData["link_id"] +"><a href=/links/" + userLinkData["link_id"] + " class='btn btn-primary' >"+ userLinkData["link"]["description"].slice(0,16) +"... </a></img></div>"
+							);
 						})
-					})
 				}
 			});
 			
