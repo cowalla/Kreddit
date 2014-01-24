@@ -10,4 +10,9 @@ Each user can also watch posts, either because they like the image or because th
 to keep tabs on the conversation in the comments.
 
 Both posts and comments have upvoting/downvoting capabilities, for which each user
-gains "kred". Kred 
+gains "kred" (analog to karma). The user accumulates cred in their profile, showing their
+prestige.
+
+== Acknowledgement
+
+Thanks to AppAcademy for teaching me how to do this. Check them out at appacademy.io
