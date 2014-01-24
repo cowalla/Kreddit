@@ -31,15 +31,35 @@ body {
 
 .main{
 	padding: 5px;
-	background: #eee
+	background: #eee;
+	height: 1000px;
+}
+.vote-holder{
+	float:left;
+	padding: 5px;
 }
 
 .watched-posts {
 	float:left;
 	height: 1000px;
 	padding: 5px;
-	background: #FA5555;
+	background: #FA5555;	
+}
+
+.picture-thumb{
+}
+
+.comment-body{
 	
+}
+
+.btn-comment{
+	float:auto;
+}
+
+.link-detail {
+	background: #99CCFF;
+	padding: 5px;
 }
 
 .sidebar {

@@ -1,21 +1,22 @@
-<div class="comment-section">
-
 	<%@vote_comment = comment %>
 	<%comment_votes = comment.votes%>
 	<%comment_upvotes = comment_votes.select{|vote| vote.value == 1 }%>
 	<%comment_downvotes = comment_votes.select{|vote| vote.value == -1 }%>
 	<%@c_karma = (comment_upvotes.count - comment_downvotes.count)%>
-	<form action= "/votes" method="POST">
-		<input type="hidden"
-		name="authenticity_token"
-		value="<%=form_authenticity_token%>">
+	<div class="vote-holder">
+		<form action= "/votes" method="POST">
+			<input type="hidden"
+			name="authenticity_token"
+			value="<%=form_authenticity_token%>">
 
-		<%= render partial: "votes/vote" %>
-	</form>
-
+			<%= render partial: "votes/vote" %>
+		</form>
+	</div>
 	<% user = User.find(comment.user_id) %>
+	<div class="username comment">
 	<%=link_to user.username, user_url(user)%>: <%=comment.body%>
-	<div class="form-hidden">
+	</div>
+	<div class="comment-body">
 		<form action="/comments" method="post">
 
 			<input type="hidden"
@@ -38,7 +39,6 @@
 			name="comment[body]"
 			placeholder="Your comment here"></textarea>
 
-			<input type="submit" value="submit" class="btn btn-primary">
+			<input type="submit" value="submit" class="btn btn-primary btn-comment">
 		</form>
 	</div>
-</div>

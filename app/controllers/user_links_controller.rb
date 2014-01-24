@@ -1,9 +1,13 @@
 class UserLinksController < ApplicationController
   
   def index
+    if !!current_user
       UserLink.create({:user_id => current_user.id, :link_id => 1})
       @user_links = UserLink.where({:user_id => current_user.id})
       render :json => @user_links
+    else
+      render :json => {}
+    end
   end
   
   def show

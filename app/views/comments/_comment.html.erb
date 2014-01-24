@@ -5,18 +5,20 @@
 	<%comment_upvotes = comment_votes.select{|vote| vote.value == 1 }%>
 	<%comment_downvotes = comment_votes.select{|vote| vote.value == -1 }%>
 	<%@c_karma = (comment_upvotes.count - comment_downvotes.count)%>
-	<div>
-	<form action= "/votes" method="POST">
-		<input type="hidden"
-		name="authenticity_token"
-		value="<%=form_authenticity_token%>">
+	<div class="vote-holder">
+		<form action= "/votes" method="POST">
+			<input type="hidden"
+			name="authenticity_token"
+			value="<%=form_authenticity_token%>">
 		
-	<%= render partial: "votes/vote", :locals => { :subreddit => @subreddit } %>
-	</form>
+		<%= render partial: "votes/vote", :locals => { :subreddit => @subreddit } %>
+		</form>
 	</div>
 <% parent_user = User.find(parent.user_id) %>
+<div class="username comment">
  <%= link_to parent_user.username, user_url(parent_user) %>: <%= parent.body%><br>
-	<div class="form-hidden">
+</div>
+<div class="comment-body">
 	<form action="/comments" method="post">
 	
 		<input type="hidden"
@@ -32,22 +34,22 @@
 		name="comment[link_id]"
 		id="link_id"
 		value="<%= @link.id %>">
-		
+
 		<label for="body"></label>
 	  <textarea
 	     id="body"
 	     name="comment[body]"
 		 placeholder="Your comment here"></textarea>
+	  <input type="submit" value="submit" class="btn btn-primary btn-comment">
 
-	  <input type="submit" value="submit" class="btn btn-primary">
 	</form>
-
 </div>
+	<ul>
 	<% children.each do |comment, value| %>
-	<br>
-	<div>
+	<li class="sub-comment">
  	<%= render partial: "comments/comment", :locals => { parent: comment, children: comment.comments }%> 
-	</div>
+	</li>
 	<br>
 	<%end%>
+	</ul>
 </div>
