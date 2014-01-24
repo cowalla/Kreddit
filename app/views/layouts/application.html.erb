@@ -40,20 +40,35 @@
 					.removeClass("watch-button")
 					.text("Unwatch")
 					.attr('data-ul-id', userLinkData["id"]);
+					debugger
+					$(".watched-posts").append(
+						"<div class='thumbnail-holder' data-link-id=" + userLinkData["link_id"] +"><img class='watched-post' data-link-id=" + userLinkData["link_id"] +" src="+ userLinkData["url"] +">"+ userLinkData["description"] +"</img></div>"
+						);
+					
 					}
 				)}
 			});
 			
 		$("body").on("click", ".watch-button", function(event){
+			event.preventDefault();
 			var clickedButton = $(event.target);
 			var userlinkLinkId = clickedButton.data("link-id");
 			$.ajax({
 				type: 'post',
 				url: '/user_links',
-				data: { link_id: userlinkLinkId, user_id: "1" },
+				data: { user_link: {
+					 link_id: userlinkLinkId }
+					},
 				success: function(data){
-					debugger
-					console.log("posted");
+					console.log(data["id"] + " posted");
+					clickedButton.addClass("unwatch-button")
+					.removeClass("watch-button")
+					.text("Unwatch")
+					.attr("data-ul-id", data["id"]);
+					
+					$(".watched-posts").append(
+						"<div class='thumbnail-holder' data-link-id=" + userlinkLinkId +"><img class='watched-post' data-link-id=" + userlinkLinkId +" src="+ clickedButton.data("avatar") +">"+ clickedButton.data("description") +"</img></div>"
+						);
 				}
 			});
 		});
@@ -61,7 +76,8 @@
 		$("body").on("click", ".unwatch-button", function(event){
 			event.preventDefault();
 			var clickedButton = $(event.target);
-			var userlinkid = clickedButton.data("ul-id");
+			var userlinkid = clickedButton.attr("data-ul-id");
+			console.log(userlinkid);
 			$.ajax({
 				type: 'delete',
 				url: '/user_links/' + userlinkid,
@@ -70,6 +86,7 @@
 					clickedButton.addClass("watch-button")
 					.removeClass("unwatch-button")
 					.text("Watch");
+					$(".thumbnail-holder[data-link-id=" + clickedButton.attr("data-link-id") +"]").remove();
 				}
 			});
 		});
@@ -113,20 +130,13 @@
 			<%= yield %>
 		</div>
 
-		<div class="col col-lg-2 sidebar-replace">
+		<div class="col col-lg-3 sidebar-replace">
 			<div class="list-group">
 				<%= render "subreddits/sidebarContent" %>
 			</div>
 		</div>
-
-		<div class="navbar navbar-default navbar-fixed-bottom">
-			<div class="col col-lg-1">
-				<div class="list-group">
-					<%= render "sidebars/subreddit" %>
-				</div>
-			</div>
-		</div>
-		<div class="watched-posts">
+		<div class="watched-posts navbar navbar-fixed-bottom display-inline-block">
+			<div class="watched-post-title display-inline-block">Watched Posts: </div>
 		</div>
 	</div>
 </body>

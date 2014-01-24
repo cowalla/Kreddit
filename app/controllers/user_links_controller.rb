@@ -13,8 +13,8 @@ class UserLinksController < ApplicationController
   
   
   def create
-      params[:user_id] = current_user.id
-      @user_link = UserLink.new(params)
+      params[:user_link][:user_id] = current_user.id
+      @user_link = UserLink.new(params[:user_link])
       if @user_link.save
         render :json => @user_link
         #current_user.watched_links
