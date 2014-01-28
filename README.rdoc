@@ -1,18 +1,21 @@
 == Kreddit
 
 Kreddit is a simple image forum whose design is inspired by Reddit.
-Kreddit was created and maintained by Connor Wallace. 
+Kreddit was created is maintained by Connor Wallace. 
 
 == Features
 
 Users can post images and gifs as urls or as files and discuss them in their own pages.
 Each user can also watch posts, either because they like the image or because they want
-to keep tabs on the conversation in the comments.
+to keep tabs on the conversation in the comments. Images are stored in my Amazon S3 bucket,
+while text, votes, etc. are kept in the local database.
 
 Both posts and comments have upvoting/downvoting capabilities, for which each user
 gains "kred" (analog to karma). The user accumulates cred in their profile, showing their
 prestige.
 
-== Acknowledgement
+== About
 
-Thanks to AppAcademy for teaching me how to do this. Check them out at appacademy.io
+Kreddit is my final project submission to App Academy. The final project is a week-long challenge 
+to create a standalone website using the skills accrued during App Academy. My thanks go out to them,
+they helped me learn so much in 9 weeks.
